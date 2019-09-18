@@ -1,0 +1,2 @@
+include ':app', ':nukasdk'
+rootProject.name='AkunSports'
