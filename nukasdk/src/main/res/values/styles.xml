@@ -20,7 +20,7 @@
     <style name="MessageBar.EditText">
         <item name="android:padding">10dp</item>
         <item name="android:inputType">text</item>
-        <item name="android:background">@drawable/bg_rounded</item>
+        <item name="android:background">@drawable/bg_rounded_edit_text</item>
     </style>
     <style name="MessageBar.ActionButton">
         <item name="android:scaleType">centerInside</item>
