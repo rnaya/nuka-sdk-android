@@ -3,6 +3,7 @@
 
     <style name="ChatBotAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar</item>
+        <item name="colorControlNormal">@color/accentBlue</item>
     </style>
 
     <style name="Toolbar" />

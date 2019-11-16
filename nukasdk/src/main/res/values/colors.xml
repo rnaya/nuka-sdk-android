@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accentBlue">@android:color/holo_blue_dark</color>
+    <color name="accentBlue">#0270ff</color>
 </resources>
