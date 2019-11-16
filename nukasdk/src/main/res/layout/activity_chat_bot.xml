@@ -56,4 +56,42 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatMessages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f2f2f8"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ede3e5">
+
+        <EditText
+            style="@style/MessageBar.EditText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:hint="@string/text_message_hint"
+            android:importantForAutofill="no" />
+
+        <ImageButton
+            style="@style/MessageBar.ActionButton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_send"
+            android:contentDescription="@string/send_text_message_description"/>
+
+        <ImageButton
+            style="@style/MessageBar.ActionButton"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_mic"
+            android:contentDescription="@string/send_audio_message_description"/>
+
+    </LinearLayout>
+
 </LinearLayout>

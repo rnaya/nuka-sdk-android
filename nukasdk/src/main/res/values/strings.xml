@@ -3,4 +3,7 @@
     <string name="bot_name">Nuka</string>
     <string name="bot_description">Chat bot</string>
     <string name="status_online">En línea</string>
+    <string name="send_text_message_description">Enviar mensaje de texto</string>
+    <string name="send_audio_message_description">Enviar mensaje de audio</string>
+    <string name="text_message_hint">Pregúntame algo…</string>
 </resources>
