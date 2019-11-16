@@ -1,4 +1,4 @@
-package ai.akun.nukasdk.chatbot.presentation.views
+package ai.akun.nukasdk.chatbot.presentation.shared
 
 import ai.akun.nukasdk.R
 import android.content.Context

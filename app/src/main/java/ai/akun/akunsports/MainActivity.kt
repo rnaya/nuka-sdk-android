@@ -1,7 +1,7 @@
 package ai.akun.akunsports
 
 
-import ai.akun.nukasdk.chatbot.presentation.ChatBotActivity
+import ai.akun.nukasdk.chatbot.presentation.main.ChatBotActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
