@@ -76,6 +76,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="10dp"
+            android:imeOptions="actionSend"
             android:hint="@string/text_message_hint"
             android:importantForAutofill="no" />
 
@@ -85,6 +86,7 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_send"
+            android:alpha="0.5"
             android:contentDescription="@string/send_text_message_description"/>
 
         <ImageButton

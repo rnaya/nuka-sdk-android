@@ -4,6 +4,8 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
 
@@ -41,6 +43,18 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
     }
 
     private fun setUpMessageBar() {
+        messageContent.doAfterTextChanged {
+            presenter.onTextMessageDraftUpdated(messageContent.text.toString())
+        }
+        messageContent.setOnEditorActionListener { _, actionId, _ ->
+            var action = false
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                presenter.onTextMessageSent(messageContent.text.toString())
+                action = true
+            }
+
+            action
+        }
         sendTextMessage.setOnClickListener {
             presenter.onTextMessageSent(messageContent.text.toString())
         }
@@ -49,6 +63,16 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
     override fun loadMessages(messages: List<String>) {
         chatMessagesAdapter.loadMessages(messages)
         scrollToLastMessage()
+    }
+
+    override fun disableTextMessageSending() {
+        sendTextMessage.alpha = 0.5f
+        sendTextMessage.isEnabled = false
+    }
+
+    override fun enableTextMessageSending() {
+        sendTextMessage.alpha = 1f
+        sendTextMessage.isEnabled = true
     }
 
     override fun addNewMessage(message: String) {

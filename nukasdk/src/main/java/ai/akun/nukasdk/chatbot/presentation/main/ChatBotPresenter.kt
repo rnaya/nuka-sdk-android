@@ -13,8 +13,16 @@ class ChatBotPresenter(private val view: ChatBotContract.View) : ChatBotContract
         view.navigateBack()
     }
 
+    override fun onTextMessageDraftUpdated(content: String) {
+        if(content.isEmpty())
+            view.disableTextMessageSending()
+        else
+            view.enableTextMessageSending()
+    }
+
     override fun onTextMessageSent(content: String) {
-        view.addNewMessage(content)
+        if(content.isNotEmpty())
+            view.addNewMessage(content)
     }
 
 }
