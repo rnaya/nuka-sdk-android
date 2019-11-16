@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <activity android:name=".ChatBotActivity"
+        <activity android:name=".chatbot.presentation.ChatBotActivity"
             android:theme="@style/ChatBotAppTheme"
             android:screenOrientation="portrait"/>
 

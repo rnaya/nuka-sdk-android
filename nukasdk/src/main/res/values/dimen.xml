@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbarElevation">4dp</dimen>
+    <dimen name="avatarCornerRadius">100dp</dimen>
+    <dimen name="avatarBorderWidth">2dp</dimen>
+    <dimen name="avatarPadding">5dp</dimen>
+</resources>

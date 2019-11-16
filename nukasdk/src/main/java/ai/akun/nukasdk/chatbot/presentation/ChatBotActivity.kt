@@ -1,5 +1,6 @@
-package ai.akun.nukasdk
+package ai.akun.nukasdk.chatbot.presentation
 
+import ai.akun.nukasdk.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_chat_bot.*

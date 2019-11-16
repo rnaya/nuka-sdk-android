@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".ChatBotActivity">
+    tools:context=".chatbot.presentation.ChatBotActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
-        android:elevation="4dp"
+        android:elevation="@dimen/toolbarElevation"
         tools:layout_height="60dp"
         tools:targetApi="lollipop">
 
@@ -20,20 +20,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginEnd="10dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/bot_image"
-                android:contentDescription="@string/bot_description"
-                tools:ignore="RtlSymmetry" />
+            <ai.akun.nukasdk.chatbot.presentation.views.ChatBotAvatar
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:padding="5dp"
+                tools:layout_width="60dp"
+                tools:layout_height="60dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
