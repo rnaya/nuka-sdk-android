@@ -48,11 +48,17 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
 
     override fun loadMessages(messages: List<String>) {
         chatMessagesAdapter.loadMessages(messages)
+        scrollToLastMessage()
     }
 
     override fun addNewMessage(message: String) {
         chatMessagesAdapter.addNewMessage(message)
         messageContent.setText("")
+        scrollToLastMessage()
+    }
+
+    private fun scrollToLastMessage() {
+        chatMessages.scrollToPosition(chatMessagesAdapter.itemCount - 1)
     }
 
     override fun navigateBack() {
