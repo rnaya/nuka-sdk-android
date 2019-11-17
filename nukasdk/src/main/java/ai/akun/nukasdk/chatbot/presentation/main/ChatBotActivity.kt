@@ -1,6 +1,8 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
 import ai.akun.nukasdk.R
+import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
+import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,10 +10,13 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
+import javax.inject.Inject
 
 class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
 
-    private lateinit var presenter: ChatBotContract.Presenter
+    @Inject
+    lateinit var presenter: ChatBotContract.Presenter
+
     private lateinit var chatMessagesAdapter: ChatMessagesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +26,16 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
         setUpChatMessagesList()
         setUpMessageBar()
 
-        presenter = ChatBotPresenter(this) //use dagger
+        injectDependency()
+        presenter.attach(this)
+    }
+
+    private fun injectDependency() {
+        val activityComponent = DaggerActivityComponent.builder()
+            .activityModule(ActivityModule(this))
+            .build()
+
+        activityComponent.inject(this)
     }
 
     private fun setUpToolbar() {

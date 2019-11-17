@@ -1,5 +1,7 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.chatbot.presentation.shared.BaseContract
+
 class ChatBotContract {
 
     interface View {
@@ -10,7 +12,7 @@ class ChatBotContract {
         fun addNewMessage(message: String)
     }
 
-    interface Presenter {
+    interface Presenter : BaseContract.Presenter<View> {
         fun onBackPressed()
         fun onTextMessageDraftUpdated(content: String)
         fun onTextMessageSent(content: String)

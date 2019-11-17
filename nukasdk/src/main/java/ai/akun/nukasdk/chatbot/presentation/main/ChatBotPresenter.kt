@@ -1,8 +1,12 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
-class ChatBotPresenter(private val view: ChatBotContract.View) : ChatBotContract.Presenter {
+class ChatBotPresenter : ChatBotContract.Presenter {
 
-    init {
+    private lateinit var view: ChatBotContract.View
+
+    override fun attach(view: ChatBotContract.View) {
+        this.view = view
+
         val mockMessages = mutableListOf<String>()
         mockMessages.add("Hi")
         mockMessages.add("How are you?")
