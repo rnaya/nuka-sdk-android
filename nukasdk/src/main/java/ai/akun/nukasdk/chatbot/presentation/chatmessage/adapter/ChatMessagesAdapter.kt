@@ -1,20 +1,32 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
+import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessageType
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.MessageHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_row_message_sent.view.*
 
-class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessagesAdapter.MessageHolder>() {
+class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
 
-    private var messages: MutableList<String> = mutableListOf()
+    private var messages: MutableList<ChatMessage> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
-        val inflatedView = parent.inflate(R.layout.item_row_message_sent, false)
-        return MessageHolder(inflatedView)
+        return when(viewType) {
+            ChatMessageType.RECEIVED.id -> {
+                val inflatedView = parent.inflate(R.layout.item_row_message_sent, false)//TODO change to received
+                SentChatMessageHolder(inflatedView)
+            }
+            else -> {
+                val inflatedView = parent.inflate(R.layout.item_row_message_sent, false)
+                SentChatMessageHolder(inflatedView)
+            }
+        }
     }
+
+    override fun getItemViewType(position: Int) = messages[position].type.id
 
     override fun getItemCount(): Int = messages.size
 
@@ -23,24 +35,14 @@ class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessagesAdapter.MessageHold
         holder.bind(message)
     }
 
-    fun loadMessages(messages: List<String>) {
+    fun loadMessages(messages: List<ChatMessage>) {
         this.messages = messages.toMutableList()
         notifyDataSetChanged()
     }
 
-    fun addNewMessage(message: String) {
+    fun addNewMessage(message: ChatMessage) {
         messages.add(message)
         notifyItemInserted(messages.size - 1)
-    }
-
-    class MessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var message: String
-
-        fun bind(message: String) {
-            this.message = message
-            itemView.content.text = message
-        }
-
     }
 
 }

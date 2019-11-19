@@ -3,6 +3,7 @@ package ai.akun.nukasdk.chatbot.presentation.main
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
+import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -74,7 +75,7 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
         }
     }
 
-    override fun loadMessages(messages: List<String>) {
+    override fun loadMessages(messages: List<ChatMessage>) {
         chatMessagesAdapter.loadMessages(messages)
         scrollToLastMessage()
     }
@@ -89,7 +90,7 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
         sendTextMessage.isEnabled = true
     }
 
-    override fun addNewMessage(message: String) {
+    override fun addNewMessage(message: ChatMessage) {
         chatMessagesAdapter.addNewMessage(message)
         messageContent.setText("")
         scrollToLastMessage()

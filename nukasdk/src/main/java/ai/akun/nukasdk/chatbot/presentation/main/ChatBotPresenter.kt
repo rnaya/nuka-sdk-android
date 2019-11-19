@@ -1,5 +1,8 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessageType
+
 class ChatBotPresenter : ChatBotContract.Presenter {
 
     private lateinit var view: ChatBotContract.View
@@ -7,9 +10,9 @@ class ChatBotPresenter : ChatBotContract.Presenter {
     override fun attach(view: ChatBotContract.View) {
         this.view = view
 
-        val mockMessages = mutableListOf<String>()
-        mockMessages.add("Hi")
-        mockMessages.add("How are you?")
+        val mockMessages = mutableListOf<ChatMessage>()
+        mockMessages.add(ChatMessage("Hi, I'm the bot", ChatMessageType.RECEIVED))
+        mockMessages.add(ChatMessage("Hi bot!", ChatMessageType.SENT))
         view.loadMessages(mockMessages)
     }
 
@@ -26,7 +29,7 @@ class ChatBotPresenter : ChatBotContract.Presenter {
 
     override fun onTextMessageSent(content: String) {
         if(content.isNotEmpty())
-            view.addNewMessage(content)
+            view.addNewMessage(ChatMessage(content, ChatMessageType.SENT))
     }
 
 }
