@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 
 
-class ChatBotAvatar : FrameLayout {
+class ChatBotAvatarView : FrameLayout {
 
     constructor(context: Context) : super(context) {
         init()
