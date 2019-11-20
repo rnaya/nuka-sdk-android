@@ -11,7 +11,10 @@ class ChatBotPresenter : ChatBotContract.Presenter {
         this.view = view
 
         val mockMessages = mutableListOf<ChatMessage>()
-        mockMessages.add(ChatMessage("Hi, I'm the bot", ChatMessageType.RECEIVED))
+        mockMessages.add(ChatMessage("Bienvenido! Me puedes preguntar cosas como: \n" +
+                "- Cuando es el proximo partido?\n" +
+                "- Como está el resultado?\n" +
+                "- Dame las redes sociales de Lionel Messi", ChatMessageType.RECEIVED))
         mockMessages.add(ChatMessage("Hi bot!", ChatMessageType.SENT))
         view.loadMessages(mockMessages)
     }

@@ -16,7 +16,7 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
         return when(viewType) {
             ChatMessageType.RECEIVED.id -> {
-                val inflatedView = parent.inflate(R.layout.item_row_message_sent, false)//TODO change to received
+                val inflatedView = parent.inflate(R.layout.item_row_message_received, false)
                 SentChatMessageHolder(inflatedView)
             }
             else -> {
