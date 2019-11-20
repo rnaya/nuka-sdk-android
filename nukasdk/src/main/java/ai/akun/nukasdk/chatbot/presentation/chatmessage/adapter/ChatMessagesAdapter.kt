@@ -4,6 +4,7 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
 import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessageType
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.MessageHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ReceivedChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
         return when(viewType) {
             ChatMessageType.RECEIVED.id -> {
                 val inflatedView = parent.inflate(R.layout.item_row_message_received, false)
-                SentChatMessageHolder(inflatedView)
+                ReceivedChatMessageHolder(inflatedView)
             }
             else -> {
                 val inflatedView = parent.inflate(R.layout.item_row_message_sent, false)

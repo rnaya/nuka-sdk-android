@@ -8,5 +8,8 @@
     <dimen name="avatarPadding">5dp</dimen>
 
     <!--Messages-->
-    <dimen name="text_message_size">16sp</dimen>
+    <dimen name="textMessageSize">18sp</dimen>
+    <dimen name="messageCardElevation">4dp</dimen>
+    <dimen name="messageCardMargin">5dp</dimen>
+    <dimen name="messageActionPadding">5dp</dimen>
 </resources>
