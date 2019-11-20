@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/messageCardMargin"
         android:layout_weight="1"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/messageCardElevation">
 
         <LinearLayout
@@ -37,10 +37,33 @@
                 tools:text="Hi, this is a text from the bot, enjoy!" />
 
             <LinearLayout
-                android:id="@+id/actionsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" />
+                android:padding="5dp"
+                android:orientation="horizontal" >
+
+                <Button
+                    style="@style/ChatMessage.Action"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Partidos" />
+
+                <Button
+                    style="@style/ChatMessage.Action"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Posiciones" />
+
+                <Button
+                    style="@style/ChatMessage.Action"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jugadores" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
