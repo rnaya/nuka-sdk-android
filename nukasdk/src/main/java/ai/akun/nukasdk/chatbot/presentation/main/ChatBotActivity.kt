@@ -4,31 +4,43 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.domain.chatmessage.SendTextChatMessageUseCase
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
 import javax.inject.Inject
 
-class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
+class ChatBotActivity : AppCompatActivity() {
+
+    private lateinit var chatBotViewModel: ChatBotViewModel //TODO inject
+    private lateinit var chatMessagesAdapter: ChatMessagesAdapter
 
     @Inject
-    lateinit var presenter: ChatBotContract.Presenter
-
-    private lateinit var chatMessagesAdapter: ChatMessagesAdapter
+    lateinit var sendTextChatMessageUseCase: SendTextChatMessageUseCase //TODO inject into viewmodel directly
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_bot)
+
+        injectDependency()
+        setUpViewModel()
         setUpToolbar()
         setUpChatMessagesList()
         setUpMessageBar()
 
-        injectDependency()
-        presenter.attach(this)
+        getMessages()
+    }
+
+    private fun setUpViewModel() {
+        chatBotViewModel =
+            ViewModelProviders.of(this, ChatBotViewModel.Factory(sendTextChatMessageUseCase))
+                .get(ChatBotViewModel::class.java)
     }
 
     private fun injectDependency() {
@@ -44,7 +56,7 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
-            presenter.onBackPressed()
+            onBackPressed()
         }
     }
 
@@ -55,52 +67,59 @@ class ChatBotActivity : AppCompatActivity(), ChatBotContract.View {
 
         chatMessagesAdapter = ChatMessagesAdapter()
         chatMessages.adapter = chatMessagesAdapter
+
+        chatBotViewModel.onChatMessagesUpdated().observe(this, Observer {
+            loadMessages(it)
+        })
     }
 
     private fun setUpMessageBar() {
         messageContent.doAfterTextChanged {
-            presenter.onTextMessageDraftUpdated(messageContent.text.toString())
+            if(messageContent.text.toString().isEmpty()) {
+                disableTextMessageSending()
+            } else {
+                enableTextMessageSending()
+            }
         }
         messageContent.setOnEditorActionListener { _, actionId, _ ->
             var action = false
             if (actionId == EditorInfo.IME_ACTION_SEND) {
-                presenter.onTextMessageSent(messageContent.text.toString())
+                sendTextMessage(messageContent.text.toString())
                 action = true
             }
 
             action
         }
         sendTextMessage.setOnClickListener {
-            presenter.onTextMessageSent(messageContent.text.toString())
+            sendTextMessage(messageContent.text.toString())
         }
     }
 
-    override fun loadMessages(messages: List<ChatMessage>) {
+    private fun getMessages() {
+        chatBotViewModel.fetchMessages()
+    }
+
+    private fun loadMessages(messages: List<ChatMessage>) {
         chatMessagesAdapter.loadMessages(messages)
-        scrollToLastMessage()
-    }
-
-    override fun disableTextMessageSending() {
-        sendTextMessage.alpha = 0.5f
-        sendTextMessage.isEnabled = false
-    }
-
-    override fun enableTextMessageSending() {
-        sendTextMessage.alpha = 1f
-        sendTextMessage.isEnabled = true
-    }
-
-    override fun addNewMessage(message: ChatMessage) {
-        chatMessagesAdapter.addNewMessage(message)
         messageContent.setText("")
         scrollToLastMessage()
     }
 
-    private fun scrollToLastMessage() {
-        chatMessages.scrollToPosition(chatMessagesAdapter.itemCount - 1)
+    private fun disableTextMessageSending() {
+        sendTextMessage.alpha = 0.5f
+        sendTextMessage.isEnabled = false
     }
 
-    override fun navigateBack() {
-        onBackPressed()
+    private fun enableTextMessageSending() {
+        sendTextMessage.alpha = 1f
+        sendTextMessage.isEnabled = true
+    }
+
+    private fun sendTextMessage(text: String) {
+        chatBotViewModel.sendTextMessage(text)
+    }
+
+    private fun scrollToLastMessage() {
+        chatMessages.scrollToPosition(chatMessagesAdapter.itemCount - 1)
     }
 }

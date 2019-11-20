@@ -37,11 +37,15 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
     }
 
     fun loadMessages(messages: List<ChatMessage>) {
-        this.messages = messages.toMutableList()
-        notifyDataSetChanged()
+        if(this.messages.isEmpty()) {
+            this.messages = messages.toMutableList()
+            notifyDataSetChanged()
+        } else {
+            addNewMessage(messages.last())
+        }
     }
 
-    fun addNewMessage(message: ChatMessage) {
+    private fun addNewMessage(message: ChatMessage) {
         messages.add(message)
         notifyItemInserted(messages.size - 1)
     }
