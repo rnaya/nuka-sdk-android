@@ -4,6 +4,7 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.domain.chatmessage.FetchChatMessagesUseCase
 import ai.akun.nukasdk.chatbot.domain.chatmessage.SendTextChatMessageUseCase
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,8 @@ class ChatBotActivity : AppCompatActivity() {
     private lateinit var chatMessagesAdapter: ChatMessagesAdapter
 
     @Inject
+    lateinit var fetchChatMessagesUseCase: FetchChatMessagesUseCase //TODO inject into viewmodel directly
+    @Inject
     lateinit var sendTextChatMessageUseCase: SendTextChatMessageUseCase //TODO inject into viewmodel directly
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +42,7 @@ class ChatBotActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         chatBotViewModel =
-            ViewModelProviders.of(this, ChatBotViewModel.Factory(sendTextChatMessageUseCase))
+            ViewModelProviders.of(this, ChatBotViewModel.Factory(fetchChatMessagesUseCase, sendTextChatMessageUseCase))
                 .get(ChatBotViewModel::class.java)
     }
 
