@@ -1,5 +1,6 @@
 package ai.akun.nukasdk.chatbot.di.module
 
+import ai.akun.nukasdk.chatbot.domain.chatmessage.SendTextChatMessageUseCase
 import ai.akun.nukasdk.chatbot.presentation.main.ChatBotContract
 import ai.akun.nukasdk.chatbot.presentation.main.ChatBotPresenter
 import android.app.Activity
@@ -15,8 +16,8 @@ class ActivityModule(private val activity: Activity) {
     }
 
     @Provides
-    fun providePresenter(): ChatBotContract.Presenter {
-        return ChatBotPresenter()
+    fun providePresenter(textChatMessageUseCase: SendTextChatMessageUseCase): ChatBotContract.Presenter {
+        return ChatBotPresenter(textChatMessageUseCase)
     }
 
 }
