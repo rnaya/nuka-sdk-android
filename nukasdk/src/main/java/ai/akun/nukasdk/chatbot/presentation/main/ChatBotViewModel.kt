@@ -1,6 +1,5 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
-import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageMapper
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,8 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class ChatBotViewModel @Inject constructor(private val chatMessageRepository: ChatMessageRepository,
-                                           private val chatMessageMapper: ChatMessageMapper) : ViewModel() {
+class ChatBotViewModel @Inject constructor(private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
 
     private val disposables = CompositeDisposable()
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
@@ -25,20 +23,19 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .getAllMessages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ chatMessageEntities ->
-                this.chatMessages = chatMessageEntities.map { chatMessageMapper.fromDb(it) }.toMutableList()
+            .subscribe({ chatMessages ->
+                this.chatMessages = chatMessages.toMutableList()
                 this.chatMessagesLiveData.value = this.chatMessages
             }, {error ->
                 Timber.e(error, "Error while getting chat messages")
             })
-            .also {
-                disposables.add(it)
-            }
+            .also { disposables.add(it) }
     }
 
-    fun sendTextMessage(text: String) {
+    fun sendTextChatMessage(text: String) {
         val chatMessage = ChatMessage(text, true)
         saveChatMessage(chatMessage)
+        sendChatMessage(chatMessage)
     }
 
     private fun saveChatMessage(chatMessage: ChatMessage) {
@@ -54,5 +51,19 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .also {
                 disposables.add(it)
             }
+    }
+
+    private fun sendChatMessage(chatMessage: ChatMessage) {
+        chatMessageRepository
+            .sendChatMessage(chatMessage)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ botChatMessageResponse ->
+                this.chatMessages.add(botChatMessageResponse)
+                this.chatMessagesLiveData.value = this.chatMessages
+            }, { error ->
+                Timber.e(error, "Error while sending chat message")
+            })
+            .also { disposables.add(it) }
     }
 }

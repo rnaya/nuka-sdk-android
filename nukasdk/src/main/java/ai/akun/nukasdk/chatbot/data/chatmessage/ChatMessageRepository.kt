@@ -8,17 +8,17 @@ import javax.inject.Inject
 class ChatMessageRepository @Inject constructor(private val chatMessageDao: ChatMessageDao,
                                                 private val chatMessageMapper: ChatMessageMapper) {
 
-    fun getAllMessages() : Single<List<ChatMessageEntity>> {
-        return chatMessageDao.getAll()
+    fun getAllMessages() : Single<List<ChatMessage>> {
+        return chatMessageDao.getAll().map { dbEntities -> dbEntities.map { chatMessageMapper.fromDb(it) } }
     }
 
     fun saveChatMessage(message: ChatMessage): Completable {
         return chatMessageDao.insert(chatMessageMapper.toDb(message))
     }
 
-    fun sendTextChatMessage(sentMessage: ChatMessage) {
-        //TODO: Send message to server and insert response as ChatMessageEntity
+    fun sendChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
         val mockChatBotResponseAsEntity = ChatMessageEntity(text = "This is a mock response!", sent = false)
         chatMessageDao.insert(mockChatBotResponseAsEntity)
+        return Single.just(chatMessageMapper.fromDb(mockChatBotResponseAsEntity))
     }
 }

@@ -112,7 +112,7 @@ class ChatBotActivity : AppCompatActivity() {
     }
 
     private fun sendTextMessage(text: String) {
-        chatBotViewModel.sendTextMessage(text)
+        chatBotViewModel.sendTextChatMessage(text)
     }
 
     private fun scrollToLastMessage() {
