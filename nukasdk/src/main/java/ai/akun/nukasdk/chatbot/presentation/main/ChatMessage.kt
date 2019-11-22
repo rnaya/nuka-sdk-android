@@ -1,4 +1,4 @@
-package ai.akun.nukasdk.chatbot.domain.chatmessage
+package ai.akun.nukasdk.chatbot.presentation.main
 
 data class ChatMessage(
     val text: String,

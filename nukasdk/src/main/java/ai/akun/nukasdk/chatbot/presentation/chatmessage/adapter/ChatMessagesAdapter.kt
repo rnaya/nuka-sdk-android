@@ -1,7 +1,7 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.MessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ReceivedChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentChatMessageHolder

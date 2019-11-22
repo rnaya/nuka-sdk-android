@@ -1,6 +1,6 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 
 class ChatMessageMapper {
 

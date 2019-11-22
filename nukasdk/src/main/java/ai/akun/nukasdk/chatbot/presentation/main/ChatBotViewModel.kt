@@ -1,24 +1,16 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
-import ai.akun.nukasdk.chatbot.domain.chatmessage.FetchChatMessagesUseCase
-import ai.akun.nukasdk.chatbot.domain.chatmessage.SendTextChatMessageUseCase
+import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class ChatBotViewModel @Inject constructor(
-    private val fetchChatMessagesUseCase: FetchChatMessagesUseCase,
-    private val sendTextChatMessageUseCase: SendTextChatMessageUseCase
-) : ViewModel() {
+class ChatBotViewModel @Inject constructor(private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
 
     private val disposables = CompositeDisposable()
 
@@ -28,8 +20,8 @@ class ChatBotViewModel @Inject constructor(
     fun onChatMessagesUpdated(): LiveData<MutableList<ChatMessage>> = chatMessagesLiveData
 
     fun fetchMessages() {
-        fetchChatMessagesUseCase
-            .fetch()
+        chatMessageRepository
+            .getAllMessages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ messages ->
@@ -45,8 +37,8 @@ class ChatBotViewModel @Inject constructor(
     }
 
     fun sendTextMessage(text: String) {
-        sendTextChatMessageUseCase
-            .send(text)
+        val chatMessage = ChatMessage(text, true)
+        chatMessageRepository.sendTextChatMessage(chatMessage)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 //            .doOnSubscribe { onRetrieveMoviesListStart() }

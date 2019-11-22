@@ -3,9 +3,6 @@ package ai.akun.nukasdk.chatbot.presentation.main
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
-import ai.akun.nukasdk.chatbot.domain.chatmessage.FetchChatMessagesUseCase
-import ai.akun.nukasdk.chatbot.domain.chatmessage.SendTextChatMessageUseCase
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

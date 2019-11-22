@@ -1,6 +1,6 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
