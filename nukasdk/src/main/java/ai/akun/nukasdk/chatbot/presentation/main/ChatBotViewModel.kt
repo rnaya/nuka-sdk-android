@@ -48,9 +48,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             }, { error ->
                 Timber.e(error, "Error while saving text message")
             })
-            .also {
-                disposables.add(it)
-            }
+            .also { disposables.add(it) }
     }
 
     private fun sendChatMessage(chatMessage: ChatMessage) {

@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class ChatMessageEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val text: String,
+    val text: String?,
     val sent: Boolean
 )

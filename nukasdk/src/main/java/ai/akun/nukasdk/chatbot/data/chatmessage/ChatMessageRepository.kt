@@ -6,7 +6,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class ChatMessageRepository @Inject constructor(private val chatMessageDao: ChatMessageDao,
-                                                private val chatMessageMapper: ChatMessageMapper) {
+                                                private val chatMessageMapper: ChatMessageMapper,
+                                                private val chatMessageService: ChatMessageService) {
 
     fun getAllMessages() : Single<List<ChatMessage>> {
         return chatMessageDao.getAll().map { dbEntities -> dbEntities.map { chatMessageMapper.fromDb(it) } }
@@ -17,8 +18,11 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
     }
 
     fun sendChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
-        val mockChatBotResponseAsEntity = ChatMessageEntity(text = "This is a mock response!", sent = false)
-        chatMessageDao.insert(mockChatBotResponseAsEntity)
-        return Single.just(chatMessageMapper.fromDb(mockChatBotResponseAsEntity))
+            return Single.fromObservable(chatMessageService
+            .sendTextMessage(1,1, "es-AR", sentMessage.text!!)) //TODO get values
+                .doOnSuccess {chatMessageResponse ->
+                    val chatMessageResponseEntity = chatMessageMapper.toDb(chatMessageResponse)
+                    chatMessageDao.insert(chatMessageResponseEntity)
+                }.map { chatMessageMapper.fromResponse(it) }
     }
 }

@@ -8,9 +8,19 @@ class ChatMessageMapper {
         text = from.text,
         sent = from.sent
     )
+    
+    fun toDb(from: ChatMessageResponse) = ChatMessageEntity(
+        text = from.text,
+        sent = false
+    )
 
     fun fromDb(from: ChatMessageEntity) = ChatMessage(
         from.text,
         from.sent
+    )
+
+    fun fromResponse(from: ChatMessageResponse) = ChatMessage(
+        from.text,
+        false
     )
 }
