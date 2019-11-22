@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
@@ -19,13 +20,10 @@ import javax.inject.Inject
 
 class ChatBotActivity : AppCompatActivity() {
 
-    private lateinit var chatBotViewModel: ChatBotViewModel //TODO inject
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var chatBotViewModel: ChatBotViewModel
     private lateinit var chatMessagesAdapter: ChatMessagesAdapter
-
-    @Inject
-    lateinit var fetchChatMessagesUseCase: FetchChatMessagesUseCase //TODO inject into viewmodel directly
-    @Inject
-    lateinit var sendTextChatMessageUseCase: SendTextChatMessageUseCase //TODO inject into viewmodel directly
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +39,7 @@ class ChatBotActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel() {
-        chatBotViewModel =
-            ViewModelProviders.of(this, ChatBotViewModel.Factory(fetchChatMessagesUseCase, sendTextChatMessageUseCase))
-                .get(ChatBotViewModel::class.java)
+        chatBotViewModel = ViewModelProviders.of(this, viewModelFactory)[ChatBotViewModel::class.java]
     }
 
     private fun injectDependency() {

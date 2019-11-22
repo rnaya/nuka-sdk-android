@@ -11,8 +11,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
-class ChatBotViewModel(
+class ChatBotViewModel @Inject constructor(
     private val fetchChatMessagesUseCase: FetchChatMessagesUseCase,
     private val sendTextChatMessageUseCase: SendTextChatMessageUseCase
 ) : ViewModel() {
@@ -55,18 +56,5 @@ class ChatBotViewModel(
             .also {
                 disposables.add(it)
             }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val fetchChatMessagesUseCase: FetchChatMessagesUseCase,
-        private val sendTextChatMessageUseCase: SendTextChatMessageUseCase) :
-        ViewModelProvider.Factory {
-
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ChatBotViewModel(
-                fetchChatMessagesUseCase,
-                sendTextChatMessageUseCase
-            ) as T
-        }
     }
 }
