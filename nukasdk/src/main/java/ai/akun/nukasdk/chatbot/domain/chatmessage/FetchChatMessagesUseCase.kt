@@ -1,11 +1,12 @@
 package ai.akun.nukasdk.chatbot.domain.chatmessage
 
-import io.reactivex.Observable
+import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
+import io.reactivex.Single
+import javax.inject.Inject
 
-class FetchChatMessagesUseCase {
+class FetchChatMessagesUseCase @Inject constructor(private val chatMessageRepository: ChatMessageRepository) {
 
-    fun fetch(): Observable<List<ChatMessage>> {
-        val mockMessages = listOf(ChatMessage("This is a mock message", ChatMessageType.SENT))
-        return Observable.just(mockMessages )
+    fun fetch(): Single<List<ChatMessage>> {
+        return chatMessageRepository.getAllMessages()
     }
 }

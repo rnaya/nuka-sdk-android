@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.item_row_message_sent.view.*
 class SentChatMessageHolder(itemView: View) : MessageHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage) {
-        itemView.content.text = chatMessage.content
+        itemView.content.text = chatMessage.text
     }
 
 }

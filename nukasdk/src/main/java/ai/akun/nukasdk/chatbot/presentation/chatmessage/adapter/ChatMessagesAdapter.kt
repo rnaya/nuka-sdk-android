@@ -2,7 +2,6 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessage
-import ai.akun.nukasdk.chatbot.domain.chatmessage.ChatMessageType
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.MessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ReceivedChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentChatMessageHolder
@@ -16,7 +15,7 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
         return when(viewType) {
-            ChatMessageType.RECEIVED.id -> {
+            ViewType.RECEIVED.id -> {
                 val inflatedView = parent.inflate(R.layout.item_row_message_received, false)
                 ReceivedChatMessageHolder(inflatedView)
             }
@@ -27,7 +26,7 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
         }
     }
 
-    override fun getItemViewType(position: Int) = messages[position].type.id
+    override fun getItemViewType(position: Int) = if(messages[position].sent) ViewType.SENT.id else ViewType.RECEIVED.id
 
     override fun getItemCount(): Int = messages.size
 
@@ -50,4 +49,9 @@ class ChatMessagesAdapter : RecyclerView.Adapter<MessageHolder>() {
         notifyItemInserted(messages.size - 1)
     }
 
+}
+
+enum class ViewType(val id: Int) {
+    SENT(1),
+    RECEIVED(2)
 }

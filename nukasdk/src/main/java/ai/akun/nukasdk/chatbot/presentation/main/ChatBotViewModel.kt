@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -47,10 +49,12 @@ class ChatBotViewModel @Inject constructor(
             .send(text)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ message ->
-                this.chatMessages.add(message)
+//            .doOnSubscribe { onRetrieveMoviesListStart() }
+//            .doOnTerminate { onRetrieveMoviesListFinish() }
+            .subscribe({ responseMessage ->
+                this.chatMessages.add(responseMessage)
                 this.chatMessagesLiveData.value = this.chatMessages
-            }, {error ->
+            }, { error ->
                 Timber.e(error, "Error while sending text message")
             })
             .also {
