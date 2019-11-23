@@ -18,11 +18,8 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
     }
 
     fun sendChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
-            return Single.fromObservable(chatMessageService
-            .sendTextMessage(1,1, "es-AR", sentMessage.text!!)) //TODO get values
-                .doOnSuccess {chatMessageResponse ->
-                    val chatMessageResponseEntity = chatMessageMapper.toDb(chatMessageResponse)
-                    chatMessageDao.insert(chatMessageResponseEntity)
-                }.map { chatMessageMapper.fromResponse(it) }
+        return chatMessageService
+                .sendTextMessage(1, 1, "es-AR", sentMessage.text!!) //TODO get values
+            .map { chatMessageMapper.fromResponse(it) }
     }
 }

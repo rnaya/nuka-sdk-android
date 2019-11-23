@@ -57,8 +57,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
-                this.chatMessages.add(botChatMessageResponse)
-                this.chatMessagesLiveData.value = this.chatMessages
+                saveChatMessage(botChatMessageResponse)
             }, { error ->
                 Timber.e(error, "Error while sending chat message")
             })
