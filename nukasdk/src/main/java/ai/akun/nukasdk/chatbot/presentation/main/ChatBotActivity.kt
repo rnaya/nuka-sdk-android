@@ -4,11 +4,16 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,12 +22,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
 import javax.inject.Inject
 
+
 class ChatBotActivity : AppCompatActivity() {
+
+    companion object {
+        const val RECORD_AUDIO_PERMISSION_REQUEST_CODE = 1
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var chatBotViewModel: ChatBotViewModel
     private lateinit var chatMessagesAdapter: ChatMessagesAdapter
+
+    private var audioRecorder: MediaRecorder = MediaRecorder()
+    private var outputAudioFilePath = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,12 +111,11 @@ class ChatBotActivity : AppCompatActivity() {
             sendTextMessage(messageContent.text.toString())
         }
         sendAudioMessage.setOnTouchListener { _, motionEvent ->
-            if(motionEvent.action == MotionEvent.ACTION_DOWN){
-                audioRecordingAlert.visibility = View.VISIBLE
-            }
-            if(motionEvent.action == MotionEvent.ACTION_UP){
-                audioRecordingAlert.visibility = View.GONE
-            }
+            if(motionEvent.action == MotionEvent.ACTION_DOWN)
+                startRecordingAudioMessage()
+
+            if(motionEvent.action == MotionEvent.ACTION_UP)
+                stopRecordingAudioMessage()
 
             true
         }
@@ -132,6 +144,44 @@ class ChatBotActivity : AppCompatActivity() {
     private fun sendTextMessage(text: String) {
         chatBotViewModel.sendTextChatMessage(text)
     }
+
+    private fun startRecordingAudioMessage() {
+        if (!recordAudioPermissionGranted()) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), RECORD_AUDIO_PERMISSION_REQUEST_CODE)
+        } else {
+            audioRecordingAlert.visibility = View.VISIBLE
+
+            audioRecorder = MediaRecorder()
+            audioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+            audioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            audioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB)
+
+            outputAudioFilePath = filesDir.absolutePath + "/recording.3gp"
+            audioRecorder.setOutputFile(outputAudioFilePath)
+            audioRecorder.prepare()
+            audioRecorder.start()
+        }
+    }
+
+    private fun stopRecordingAudioMessage() {
+        audioRecordingAlert.visibility = View.GONE
+
+        if(recordAudioPermissionGranted()) {
+            audioRecorder.stop()
+            audioRecorder.release()
+
+            val mediaPlayer = MediaPlayer()
+            mediaPlayer.setDataSource(outputAudioFilePath)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+        }
+    }
+
+    private fun recordAudioPermissionGranted() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.RECORD_AUDIO
+        ) == PackageManager.PERMISSION_GRANTED
 
     private fun scrollToLastMessage() {
         chatMessages.scrollToPosition(chatMessagesAdapter.itemCount - 1)
