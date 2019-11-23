@@ -1,104 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
     tools:context=".chatbot.presentation.main.ChatBotActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:elevation="@dimen/toolbarElevation"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp"
-        tools:layout_height="60dp"
-        tools:targetApi="lollipop">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ai.akun.nukasdk.chatbot.presentation.shared.ChatBotAvatarView
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:padding="5dp"
-                tools:layout_width="60dp"
-                tools:layout_height="60dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/Toolbar.UserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bot_name" />
-
-                <TextView
-                    android:id="@+id/botStatus"
-                    style="@style/Toolbar.UserStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/status_online" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatMessages"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/messageBarBackground"
-        android:paddingBottom="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#ede3e5">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        tools:context=".chatbot.presentation.main.ChatBotActivity">
 
-        <EditText
-            android:id="@+id/messageContent"
-            style="@style/MessageBar.EditText"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:elevation="@dimen/toolbarElevation"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            tools:layout_height="60dp"
+            tools:targetApi="lollipop">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ai.akun.nukasdk.chatbot.presentation.shared.ChatBotAvatarView
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:padding="5dp"
+                    tools:layout_height="60dp"
+                    tools:layout_width="60dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Toolbar.UserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bot_name" />
+
+                    <TextView
+                        android:id="@+id/botStatus"
+                        style="@style/Toolbar.UserStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_online" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatMessages"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:imeOptions="actionSend"
-            android:hint="@string/text_message_hint"
-            android:importantForAutofill="no" />
+            android:background="@color/messageBarBackground"
+            android:paddingBottom="5dp" />
 
-        <ImageButton
-            android:id="@+id/sendTextMessage"
-            style="@style/MessageBar.ActionButton"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_send"
-            android:alpha="0.5"
-            android:contentDescription="@string/send_text_message_description"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#ede3e5">
 
-        <ImageButton
-            android:id="@+id/sendAudioMessage"
-            style="@style/MessageBar.ActionButton"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_mic"
-            android:contentDescription="@string/send_audio_message_description"/>
+            <EditText
+                android:id="@+id/messageContent"
+                style="@style/MessageBar.EditText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:hint="@string/text_message_hint"
+                android:imeOptions="actionSend"
+                android:importantForAutofill="no" />
+
+            <ImageButton
+                android:id="@+id/sendTextMessage"
+                style="@style/MessageBar.ActionButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:contentDescription="@string/send_text_message_description"
+                android:src="@drawable/ic_send" />
+
+            <ImageButton
+                android:id="@+id/sendAudioMessage"
+                style="@style/MessageBar.ActionButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/send_audio_message_description"
+                android:src="@drawable/ic_mic" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <ai.akun.nukasdk.chatbot.presentation.shared.AudioRecordingAlertView
+        android:id="@+id/audioRecordingAlert"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="40dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

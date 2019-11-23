@@ -6,6 +6,8 @@ import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
@@ -94,6 +96,16 @@ class ChatBotActivity : AppCompatActivity() {
         }
         sendTextMessage.setOnClickListener {
             sendTextMessage(messageContent.text.toString())
+        }
+        sendAudioMessage.setOnTouchListener { _, motionEvent ->
+            if(motionEvent.action == MotionEvent.ACTION_DOWN){
+                audioRecordingAlert.visibility = View.VISIBLE
+            }
+            if(motionEvent.action == MotionEvent.ACTION_UP){
+                audioRecordingAlert.visibility = View.GONE
+            }
+
+            true
         }
     }
 
