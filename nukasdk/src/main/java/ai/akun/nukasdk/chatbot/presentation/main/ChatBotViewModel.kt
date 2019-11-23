@@ -1,6 +1,7 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
     private val disposables = CompositeDisposable()
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
     private val chatMessagesLiveData = MutableLiveData<MutableList<ChatMessage>>()
+    private val loadingLiveData = MutableLiveData<Boolean>()
 
     fun onChatMessagesUpdated(): LiveData<MutableList<ChatMessage>> = chatMessagesLiveData
 
@@ -35,7 +37,11 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
     fun sendTextChatMessage(text: String) {
         val chatMessage = ChatMessage(text, true)
         saveChatMessage(chatMessage)
-        sendChatMessage(chatMessage)
+
+        Handler().postDelayed({
+            setLoading(true)
+            sendChatMessage(chatMessage)
+        }, 1500)
     }
 
     private fun saveChatMessage(chatMessage: ChatMessage) {
@@ -43,9 +49,13 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                if(!chatMessage.sent)
+                    setLoading(false)
+
                 this.chatMessages.add(chatMessage)
                 this.chatMessagesLiveData.value = this.chatMessages
             }, { error ->
+                setLoading(false)
                 Timber.e(error, "Error while saving text message")
             })
             .also { disposables.add(it) }
@@ -59,8 +69,15 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .subscribe({ botChatMessageResponse ->
                 saveChatMessage(botChatMessageResponse)
             }, { error ->
+                setLoading(false)
                 Timber.e(error, "Error while sending chat message")
             })
             .also { disposables.add(it) }
+    }
+
+    fun onLoading() = loadingLiveData
+
+    private fun setLoading(isLoading: Boolean) {
+        loadingLiveData.value = isLoading
     }
 }

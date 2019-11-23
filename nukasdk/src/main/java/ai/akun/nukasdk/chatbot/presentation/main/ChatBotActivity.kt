@@ -54,6 +54,12 @@ class ChatBotActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+        chatBotViewModel.onLoading().observe(this, Observer {loading ->
+            if(loading)
+                botStatus.text = getString(R.string.status_writing)
+            else
+                botStatus.text = getString(R.string.status_online)
+        })
     }
 
     private fun setUpChatMessagesList() {

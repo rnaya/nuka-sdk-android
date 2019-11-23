@@ -45,6 +45,7 @@
                     android:text="@string/bot_name" />
 
                 <TextView
+                    android:id="@+id/botStatus"
                     style="@style/Toolbar.UserStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
