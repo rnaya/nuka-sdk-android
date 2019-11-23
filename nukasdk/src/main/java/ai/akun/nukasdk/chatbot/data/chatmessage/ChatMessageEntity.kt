@@ -8,5 +8,6 @@ data class ChatMessageEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val text: String?,
+    val audioFilePath: String?,
     val sent: Boolean
 )

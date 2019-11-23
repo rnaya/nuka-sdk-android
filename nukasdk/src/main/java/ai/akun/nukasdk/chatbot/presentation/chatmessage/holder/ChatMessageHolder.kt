@@ -4,6 +4,6 @@ import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class MessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+abstract class ChatMessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     abstract fun bind(chatMessage: ChatMessage)
 }

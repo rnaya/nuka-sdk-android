@@ -35,7 +35,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
     }
 
     fun sendTextChatMessage(text: String) {
-        val chatMessage = ChatMessage(text, true)
+        val chatMessage = ChatMessage(text, null,true)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
@@ -79,5 +79,10 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
 
     private fun setLoading(isLoading: Boolean) {
         loadingLiveData.value = isLoading
+    }
+
+    fun sendAudioChatMessage(audioFilePath: String) {
+        val chatMessage = ChatMessage(null, audioFilePath,true)
+        saveChatMessage(chatMessage)
     }
 }

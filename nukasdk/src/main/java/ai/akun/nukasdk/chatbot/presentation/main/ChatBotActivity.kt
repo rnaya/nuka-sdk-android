@@ -6,7 +6,6 @@ import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import android.Manifest
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.view.MotionEvent
@@ -20,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_chat_bot.*
+import java.util.*
 import javax.inject.Inject
 
 
@@ -156,7 +156,7 @@ class ChatBotActivity : AppCompatActivity() {
             audioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
             audioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB)
 
-            outputAudioFilePath = filesDir.absolutePath + "/recording.3gp"
+            outputAudioFilePath = filesDir.absolutePath + "/${UUID.randomUUID()}.3gp"
             audioRecorder.setOutputFile(outputAudioFilePath)
             audioRecorder.prepare()
             audioRecorder.start()
@@ -170,10 +170,7 @@ class ChatBotActivity : AppCompatActivity() {
             audioRecorder.stop()
             audioRecorder.release()
 
-            val mediaPlayer = MediaPlayer()
-            mediaPlayer.setDataSource(outputAudioFilePath)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
+            chatBotViewModel.sendAudioChatMessage(outputAudioFilePath)
         }
     }
 
