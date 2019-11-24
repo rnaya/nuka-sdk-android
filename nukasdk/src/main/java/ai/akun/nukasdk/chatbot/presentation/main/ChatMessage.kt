@@ -7,5 +7,11 @@ data class ChatMessage(
 )
 
 enum class ChatMessageIntent(val description: String) {
-    WELCOME("nuka.welcome")
+    WELCOME("nuka.welcome"),
+    NEXT_MATCHES("nuka.matches.next"),
+    RANKING("nuka.ranking"),
+    PLAYERS_LIST("nuka.players.list"),
+    FAN_SHOP("nuka.buy.fanshop"),
+    ARTICLES("nuka.articles"),
+    GIF("nuka.botactions.giphy")
 }
