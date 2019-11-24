@@ -22,14 +22,30 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
-            <ImageView
-                android:id="@+id/play"
+            <FrameLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:tint="@color/accentBlue"
-                android:src="@drawable/ic_play_arrow" />
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/play"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:tint="@color/accentBlue"
+                    android:src="@drawable/ic_play_arrow" />
+
+                <ImageView
+                    android:id="@+id/pause"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:tint="@color/accentBlue"
+                    android:src="@drawable/ic_pause"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
 
             <FrameLayout
                 android:orientation="vertical"

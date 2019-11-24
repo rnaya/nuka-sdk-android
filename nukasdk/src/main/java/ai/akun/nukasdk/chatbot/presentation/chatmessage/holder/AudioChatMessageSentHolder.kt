@@ -19,6 +19,19 @@ class AudioChatMessageSentHolder(itemView: View) : ChatMessageHolder(itemView) {
 
         itemView.play.setOnClickListener {
             mediaPlayer.start()
+            it.visibility = View.GONE
+            itemView.pause.visibility = View.VISIBLE
+        }
+
+        itemView.pause.setOnClickListener {
+            mediaPlayer.pause()
+            it.visibility = View.GONE
+            itemView.play.visibility = View.VISIBLE
+        }
+
+        mediaPlayer.setOnCompletionListener {
+            itemView.play.visibility = View.VISIBLE
+            itemView.pause.visibility = View.GONE
         }
     }
 
