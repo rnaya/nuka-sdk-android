@@ -34,7 +34,7 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
 
     fun sendAudioChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
         val file = File(sentMessage.audioFilePath!!)
-        val requestFile = file.asRequestBody("audio/3gpp".toMediaTypeOrNull())
+        val requestFile = file.asRequestBody("audio/amr".toMediaTypeOrNull())
         val part = MultipartBody.Part.createFormData("audio", file.name, requestFile)
 
         return chatMessageService

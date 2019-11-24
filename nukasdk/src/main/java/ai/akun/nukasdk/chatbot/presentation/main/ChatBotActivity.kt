@@ -153,10 +153,10 @@ class ChatBotActivity : AppCompatActivity() {
 
             audioRecorder = MediaRecorder()
             audioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-            audioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            audioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB)
+            audioRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB)
+            audioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
 
-            outputAudioFilePath = filesDir.absolutePath + "/${UUID.randomUUID()}.3gp"
+            outputAudioFilePath = filesDir.absolutePath + "/${UUID.randomUUID()}.amr"
             audioRecorder.setOutputFile(outputAudioFilePath)
             audioRecorder.prepare()
             audioRecorder.start()
