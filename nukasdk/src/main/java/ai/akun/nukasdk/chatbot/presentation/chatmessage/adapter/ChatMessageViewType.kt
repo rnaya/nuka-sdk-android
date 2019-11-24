@@ -1,10 +1,10 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.AudioChatMessageSentHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentAudioChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ChatMessageHolder
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ChatMessageReceivedHolder
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.TextChatMessageSentHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ReceivedChatMessageHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SentTextChatMessageHolder
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.view.ViewGroup
@@ -25,28 +25,28 @@ class ChatMessageView {
             return when(chatMessageViewType) {
                 Type.TEXT_SENT.id -> {
                     val inflatedView = parent.inflate(Type.TEXT_SENT.layoutId, false)
-                    TextChatMessageSentHolder(inflatedView)
+                    SentTextChatMessageHolder(inflatedView)
                 }
                 Type.AUDIO_SENT.id -> {
                     val inflatedView = parent.inflate(Type.AUDIO_SENT.layoutId, false)
-                    AudioChatMessageSentHolder(inflatedView)
+                    SentAudioChatMessageHolder(inflatedView)
                 }
                 Type.RECEIVED.id -> {
                     val inflatedView = parent.inflate(Type.RECEIVED.layoutId, false)
-                    ChatMessageReceivedHolder(inflatedView)
+                    ReceivedChatMessageHolder(inflatedView)
                 }
                 else -> {
                     val inflatedView = parent.inflate(Type.TEXT_SENT.layoutId, false)
-                    TextChatMessageSentHolder(inflatedView)
+                    SentTextChatMessageHolder(inflatedView)
                 }
             }
         }
     }
 
     enum class Type(val id: Int, val layoutId: Int) {
-        TEXT_SENT(1, R.layout.item_row_text_chat_message_sent),
-        AUDIO_SENT(2, R.layout.item_row_audio_chat_message_sent),
-        RECEIVED(3, R.layout.item_row_chat_message_received)
+        TEXT_SENT(1, R.layout.item_row_sent_text_chat_message),
+        AUDIO_SENT(2, R.layout.item_row_sent_audio_chat_message),
+        RECEIVED(3, R.layout.item_row_received_chat_message)
     }
 
 }
