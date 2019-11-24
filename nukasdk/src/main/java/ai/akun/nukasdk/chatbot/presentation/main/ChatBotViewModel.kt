@@ -40,7 +40,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
 
         Handler().postDelayed({
             setLoading(true)
-            sendChatMessage(chatMessage)
+            sendTextChatMessageToServer(chatMessage)
         }, 1500)
     }
 
@@ -61,9 +61,9 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .also { disposables.add(it) }
     }
 
-    private fun sendChatMessage(chatMessage: ChatMessage) {
+    private fun sendTextChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendChatMessage(chatMessage)
+            .sendTextChatMessage(chatMessage)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
@@ -84,5 +84,24 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
     fun sendAudioChatMessage(audioFilePath: String) {
         val chatMessage = ChatMessage(null, audioFilePath,true)
         saveChatMessage(chatMessage)
+
+        Handler().postDelayed({
+            setLoading(true)
+            sendAudioChatMessageToServer(chatMessage)
+        }, 1500)
+    }
+
+    private fun sendAudioChatMessageToServer(chatMessage: ChatMessage) {
+        chatMessageRepository
+            .sendAudioChatMessage(chatMessage)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ botChatMessageResponse ->
+                saveChatMessage(botChatMessageResponse)
+            }, { error ->
+                setLoading(false)
+                Timber.e(error, "Error while sending chat message")
+            })
+            .also { disposables.add(it) }
     }
 }
