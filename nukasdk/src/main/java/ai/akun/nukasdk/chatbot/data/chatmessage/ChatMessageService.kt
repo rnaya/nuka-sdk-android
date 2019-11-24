@@ -26,5 +26,11 @@ interface ChatMessageService {
 
 data class ChatMessageResponse(
     @SerializedName("fulfillmentText")
-    val text: String?
+    val text: String?,
+    val intent: ChatMessageIntent
+)
+
+data class ChatMessageIntent(
+    val name: String,
+    val displayName: String
 )

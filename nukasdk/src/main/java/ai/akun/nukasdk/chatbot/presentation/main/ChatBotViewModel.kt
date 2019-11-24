@@ -1,6 +1,8 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
+import android.content.Context
 import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +13,8 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class ChatBotViewModel @Inject constructor(private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
+class ChatBotViewModel @Inject constructor(private val context: Context,
+                                           private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
 
     private val disposables = CompositeDisposable()
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
@@ -28,14 +31,27 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .subscribe({ chatMessages ->
                 this.chatMessages = chatMessages.toMutableList()
                 this.chatMessagesLiveData.value = this.chatMessages
-            }, {error ->
+
+                if (this.chatMessages.count() == 0) {
+                    addWelcomeChatMessage()
+                }
+            }, { error ->
                 Timber.e(error, "Error while getting chat messages")
             })
             .also { disposables.add(it) }
     }
 
+    private fun addWelcomeChatMessage() {
+        val welcomeChatMessage = ChatMessage(
+            context.getString(R.string.welcome_message),
+            null,
+            ChatMessageIntent.WELCOME.description
+        )
+        saveChatMessage(welcomeChatMessage)
+    }
+
     fun sendTextChatMessage(text: String) {
-        val chatMessage = ChatMessage(text, null,true)
+        val chatMessage = ChatMessage(text, null,null)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
@@ -49,7 +65,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if(!chatMessage.sent)
+                if(chatMessage.intent != null)
                     setLoading(false)
 
                 this.chatMessages.add(chatMessage)
@@ -82,7 +98,7 @@ class ChatBotViewModel @Inject constructor(private val chatMessageRepository: Ch
     }
 
     fun sendAudioChatMessage(audioFilePath: String) {
-        val chatMessage = ChatMessage(null, audioFilePath,true)
+        val chatMessage = ChatMessage(null, audioFilePath,null)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({

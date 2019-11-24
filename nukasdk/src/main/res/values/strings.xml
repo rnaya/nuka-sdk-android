@@ -3,7 +3,14 @@
     <string name="bot_name">Nuka</string>
     <string name="bot_description">Chat bot</string>
     <string name="status_online">En línea</string>
-    <string name="status_writing">Escribiendo...</string>
+    <string name="status_writing">Escribiendo…</string>
+    <string name="welcome_message">Bienvenido! Me puedes preguntar cosas como:\n
+    - Cuando es el próximo partido?\n
+    - Cómo está el resultado?\n
+    - Dame las redes sociales de Lionel Messi</string>
+    <string name="matches">Partidos</string>
+    <string name="positions">Posiciones</string>
+    <string name="players">Jugadores</string>
     <string name="send_text_message_description">Enviar mensaje de texto</string>
     <string name="send_audio_message_description">Enviar mensaje de audio</string>
     <string name="text_message_hint">Pregúntame algo…</string>

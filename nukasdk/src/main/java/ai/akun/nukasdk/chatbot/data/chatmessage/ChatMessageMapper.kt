@@ -7,18 +7,18 @@ class ChatMessageMapper {
     fun toDb(from: ChatMessage) = ChatMessageEntity(
         text = from.text,
         audioFilePath = from.audioFilePath,
-        sent = from.sent
+        intent = from.intent
     )
 
     fun fromDb(from: ChatMessageEntity) = ChatMessage(
         from.text,
         from.audioFilePath,
-        from.sent
+        from.intent
     )
 
     fun fromResponse(from: ChatMessageResponse) = ChatMessage(
         from.text,
         null,
-        false
+        from.intent.displayName
     )
 }

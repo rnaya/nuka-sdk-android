@@ -47,21 +47,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Partidos" />
+                    android:text="@string/matches" />
 
                 <Button
                     style="@style/ChatMessage.Action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Posiciones" />
+                    android:text="@string/positions" />
 
                 <Button
                     style="@style/ChatMessage.Action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Jugadores" />
+                    android:text="@string/players" />
 
             </LinearLayout>
 

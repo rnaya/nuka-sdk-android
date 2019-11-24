@@ -9,5 +9,5 @@ data class ChatMessageEntity(
     val id: Int = 0,
     val text: String?,
     val audioFilePath: String?,
-    val sent: Boolean
+    val intent: String?
 )
