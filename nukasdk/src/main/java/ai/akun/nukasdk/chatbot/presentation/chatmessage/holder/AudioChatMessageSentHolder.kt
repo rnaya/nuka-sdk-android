@@ -1,7 +1,10 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
+import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
+import android.graphics.PorterDuff
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.item_row_audio_chat_message_sent.view.*
@@ -26,6 +29,7 @@ class AudioChatMessageSentHolder(itemView: View) : ChatMessageHolder(itemView) {
         mediaPlayer.prepare()
 
         setAudioDuration()
+        setUpAudioSeekBar()
 
         itemView.play.setOnClickListener {
             playAudio()
@@ -39,7 +43,22 @@ class AudioChatMessageSentHolder(itemView: View) : ChatMessageHolder(itemView) {
             resetAudio()
         }
 
+    }
+
+    private fun setUpAudioSeekBar() {
         itemView.audioProgressSeekBar.setOnTouchListener { _, _ -> true }
+        itemView.audioProgressSeekBar.progress = 0
+        itemView.audioProgressSeekBar.max = mediaPlayer.duration
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            itemView.audioProgressSeekBar.thumb.setTint(itemView.context.getColor(R.color.accentBlue))
+            itemView.audioProgressSeekBar.progressDrawable.setTint(itemView.context.getColor(R.color.accentBlue))
+        } else {
+            @Suppress("DEPRECATION")
+            itemView.audioProgressSeekBar.thumb.setColorFilter(R.color.accentBlue, PorterDuff.Mode.SRC_ATOP)
+            @Suppress("DEPRECATION")
+            itemView.audioProgressSeekBar.progressDrawable.setColorFilter(R.color.accentBlue, PorterDuff.Mode.SRC_ATOP)
+        }
     }
 
     private fun playAudio() {
@@ -69,7 +88,5 @@ class AudioChatMessageSentHolder(itemView: View) : ChatMessageHolder(itemView) {
             mediaPlayer.duration.toLong() - TimeUnit.MINUTES.toMillis(minutes)
         )
         itemView.audioDuration.text = String.format("%02d:%02d",minutes, seconds)
-        itemView.audioProgressSeekBar.progress = 0
-        itemView.audioProgressSeekBar.max = mediaPlayer.duration
     }
 }
