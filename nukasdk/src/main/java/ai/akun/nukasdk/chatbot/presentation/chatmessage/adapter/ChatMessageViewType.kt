@@ -18,6 +18,8 @@ class ChatMessageView {
                 Type.AUDIO_SENT.id
             else if(chatMessage.intent?.isNotEmpty() == true && chatMessage.intent == ChatMessageIntent.WELCOME.description)
                 Type.TEXT_RECEIVED_WELCOME.id
+            else if(chatMessage.intent?.isNotEmpty() == true && chatMessage.intent == ChatMessageIntent.GIF.description)
+                Type.GIF_RECEIVED.id
             else
                 Type.TEXT_RECEIVED.id
         }
@@ -42,6 +44,10 @@ class ChatMessageView {
                     val inflatedView = parent.inflate(Type.TEXT_RECEIVED.layoutId, false)
                     ReceivedTextChatMessageHolder(inflatedView)
                 }
+                Type.GIF_RECEIVED.id -> {
+                    val inflatedView = parent.inflate(Type.GIF_RECEIVED.layoutId, false)
+                    ReceivedGifChatMessageHolder(inflatedView)
+                }
                 else -> {
                     val inflatedView = parent.inflate(Type.TEXT_SENT.layoutId, false)
                     SentTextChatMessageHolder(inflatedView)
@@ -54,7 +60,8 @@ class ChatMessageView {
         TEXT_SENT(1, R.layout.item_row_sent_text_chat_message),
         AUDIO_SENT(2, R.layout.item_row_sent_audio_chat_message),
         TEXT_RECEIVED(3, R.layout.item_row_received_text_chat_message),
-        TEXT_RECEIVED_WELCOME(4, R.layout.item_row_received_welcome_text_chat_message)
+        TEXT_RECEIVED_WELCOME(4, R.layout.item_row_received_welcome_text_chat_message),
+        GIF_RECEIVED(5, R.layout.item_row_received_gif_chat_message)
     }
 
 }

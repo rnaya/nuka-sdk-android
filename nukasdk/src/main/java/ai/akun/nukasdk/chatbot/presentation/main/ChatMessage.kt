@@ -1,9 +1,10 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
 data class ChatMessage(
-    val text: String?,
-    val audioFilePath: String?,
-    val intent: String?
+    val text: String? = null,
+    val audioFilePath: String? = null,
+    val intent: String? = null,
+    val imageUri: String? = null
 )
 
 enum class ChatMessageIntent(val description: String) {

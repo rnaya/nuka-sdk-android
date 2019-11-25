@@ -43,15 +43,14 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun addWelcomeChatMessage() {
         val welcomeChatMessage = ChatMessage(
-            context.getString(R.string.welcome_message),
-            null,
-            ChatMessageIntent.WELCOME.description
+            text = context.getString(R.string.welcome_message),
+            intent = ChatMessageIntent.WELCOME.description
         )
         saveChatMessage(welcomeChatMessage)
     }
 
     fun sendTextChatMessage(text: String) {
-        val chatMessage = ChatMessage(text, null,null)
+        val chatMessage = ChatMessage(text = text)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
@@ -98,7 +97,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
     }
 
     fun sendAudioChatMessage(audioFilePath: String) {
-        val chatMessage = ChatMessage(null, audioFilePath,null)
+        val chatMessage = ChatMessage(audioFilePath = audioFilePath)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
