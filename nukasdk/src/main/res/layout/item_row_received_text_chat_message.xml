@@ -15,10 +15,9 @@
         tools:layout_width="40dp" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/messageCardMargin"
-        android:layout_weight="1"
         app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/messageCardElevation">
 

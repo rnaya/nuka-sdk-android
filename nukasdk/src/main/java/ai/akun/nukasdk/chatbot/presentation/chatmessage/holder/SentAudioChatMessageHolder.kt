@@ -1,6 +1,7 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
 import ai.akun.nukasdk.R
+import ai.akun.nukasdk.chatbot.presentation.main.ChatBotViewModel
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import android.graphics.PorterDuff
 import android.media.MediaPlayer
@@ -44,6 +45,9 @@ class SentAudioChatMessageHolder(itemView: View) : ChatMessageHolder(itemView) {
         }
 
     }
+
+    override fun setViewModel(chatBotViewModel: ChatBotViewModel) { }
+
 
     private fun setUpAudioSeekBar() {
         itemView.audioProgressSeekBar.setOnTouchListener { _, _ -> true }

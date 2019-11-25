@@ -2,6 +2,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.*
+import ai.akun.nukasdk.chatbot.presentation.main.ChatBotViewModel
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
@@ -21,7 +22,7 @@ class ChatMessageView {
                 Type.TEXT_RECEIVED.id
         }
 
-        fun getChatMessageViewHolder(parent: ViewGroup, chatMessageViewType: Int): ChatMessageHolder {
+        fun getChatMessageViewHolder(parent: ViewGroup, chatMessageViewType: Int, chatBotViewModel: ChatBotViewModel? = null): ChatMessageHolder {
             return when(chatMessageViewType) {
                 Type.TEXT_SENT.id -> {
                     val inflatedView = parent.inflate(Type.TEXT_SENT.layoutId, false)
@@ -33,7 +34,9 @@ class ChatMessageView {
                 }
                 Type.TEXT_RECEIVED_WELCOME.id -> {
                     val inflatedView = parent.inflate(Type.TEXT_RECEIVED_WELCOME.layoutId, false)
-                    ReceivedWelcomeTextChatMessageHolder(inflatedView)
+                    val holder = ReceivedWelcomeTextChatMessageHolder(inflatedView)
+                    holder.setViewModel(chatBotViewModel!!)
+                    holder
                 }
                 Type.TEXT_RECEIVED.id -> {
                     val inflatedView = parent.inflate(Type.TEXT_RECEIVED.layoutId, false)
@@ -51,7 +54,7 @@ class ChatMessageView {
         TEXT_SENT(1, R.layout.item_row_sent_text_chat_message),
         AUDIO_SENT(2, R.layout.item_row_sent_audio_chat_message),
         TEXT_RECEIVED(3, R.layout.item_row_received_text_chat_message),
-        TEXT_RECEIVED_WELCOME(4, R.layout.item_row_welcome_text_chat_message)
+        TEXT_RECEIVED_WELCOME(4, R.layout.item_row_received_welcome_text_chat_message)
     }
 
 }

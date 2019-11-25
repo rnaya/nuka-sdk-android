@@ -15,10 +15,9 @@
         tools:layout_width="40dp" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/messageCardMargin"
-        android:layout_weight="1"
         app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/messageCardElevation">
 
@@ -43,6 +42,7 @@
                 android:orientation="horizontal" >
 
                 <Button
+                    android:id="@+id/matchesAction"
                     style="@style/ChatMessage.Action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -50,6 +50,7 @@
                     android:text="@string/matches" />
 
                 <Button
+                    android:id="@+id/positionsAction"
                     style="@style/ChatMessage.Action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -57,6 +58,7 @@
                     android:text="@string/positions" />
 
                 <Button
+                    android:id="@+id/playersAction"
                     style="@style/ChatMessage.Action"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

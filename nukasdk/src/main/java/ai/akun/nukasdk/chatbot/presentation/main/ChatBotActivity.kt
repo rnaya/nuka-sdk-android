@@ -84,6 +84,7 @@ class ChatBotActivity : AppCompatActivity() {
 
         chatMessagesAdapter = ChatMessagesAdapter()
         chatMessages.adapter = chatMessagesAdapter
+        chatMessagesAdapter.setViewModel(chatBotViewModel)
 
         chatBotViewModel.onChatMessagesUpdated().observe(this, Observer {
             loadMessages(it)
