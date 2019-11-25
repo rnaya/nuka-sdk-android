@@ -1,27 +1,29 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ChatMessageHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ChatMessageViewHolder
 import ai.akun.nukasdk.chatbot.presentation.main.ChatBotViewModel
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageType
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessageHolder>() {
+class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessageViewHolder>() {
 
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
     private var chatBotViewModel: ChatBotViewModel? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ChatMessageView.getChatMessageViewHolder(parent, viewType, chatBotViewModel)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageViewHolder {
+        val chatMessageType = ChatMessageType.values().find { it.getViewType() == viewType }
+        return chatMessageType?.getViewHolder(parent, chatBotViewModel)
+            ?: ChatMessageType.RECEIVED_TEXT.getViewHolder(parent, chatBotViewModel)
+    }
 
-
-    override fun getItemViewType(position: Int) =
-        ChatMessageView.getChatMessageViewType(chatMessages[position])
+    override fun getItemViewType(position: Int) = chatMessages[position].type.getViewType()
 
     override fun getItemCount(): Int = chatMessages.size
 
-    override fun onBindViewHolder(holder: ChatMessageHolder, position: Int) {
-        holder.bind(chatMessages[position])
+    override fun onBindViewHolder(viewHolder: ChatMessageViewHolder, position: Int) {
+        viewHolder.bind(chatMessages[position])
     }
 
     fun loadMessages(messages: List<ChatMessage>) {

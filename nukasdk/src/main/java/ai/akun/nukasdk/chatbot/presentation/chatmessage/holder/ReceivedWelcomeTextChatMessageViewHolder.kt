@@ -7,7 +7,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.item_row_sent_text_chat_message.view.content
 import kotlinx.android.synthetic.main.item_row_received_welcome_text_chat_message.view.*
 
-class ReceivedWelcomeTextChatMessageHolder(itemView: View) : ChatMessageHolder(itemView) {
+class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     private lateinit var chatBotViewModel: ChatBotViewModel
 
