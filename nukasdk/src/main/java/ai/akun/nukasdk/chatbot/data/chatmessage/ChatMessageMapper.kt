@@ -22,6 +22,6 @@ class ChatMessageMapper {
     fun fromResponse(from: ChatMessageResponse) = ChatMessage(
         text = from.text,
         type = ChatMessageType.values().firstOrNull { it.intent == from.intent.displayName } ?: ChatMessageType.RECEIVED_TEXT,
-        imageUri = "https://media.giphy.com/media/8RQJ4RW9PPxRK/giphy.gif" //TODO replace
+        imageUri = from.fulfillmentMessages?.get(0)?.card?.imageUri
     )
 }

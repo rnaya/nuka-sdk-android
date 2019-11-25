@@ -27,10 +27,20 @@ interface ChatMessageService {
 data class ChatMessageResponse(
     @SerializedName("fulfillmentText")
     val text: String?,
-    val intent: ChatMessageIntent
+    val intent: ChatMessageIntent,
+    val fulfillmentMessages: List<FulfillmentMessage>?
 )
 
 data class ChatMessageIntent(
     val name: String,
     val displayName: String
+)
+
+
+data class FulfillmentMessage(
+    val card: Card
+)
+
+data class Card(
+    val imageUri: String
 )
