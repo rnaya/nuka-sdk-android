@@ -16,7 +16,6 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
     //TODO get values
     private val sessionId = 1
     private val teamId = 1
-    private val locale = "es-AR"
 
     fun getAllMessages() : Single<List<ChatMessage>> {
         return chatMessageDao.getAll().map { dbEntities -> dbEntities.map { chatMessageMapper.fromDb(it) } }
@@ -26,13 +25,13 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
         return chatMessageDao.insert(chatMessageMapper.toDb(message))
     }
 
-    fun sendTextChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
+    fun sendTextChatMessage(sentMessage: ChatMessage, locale: String): Single<ChatMessage> {
         return chatMessageService
                 .sendTextChatMessage(sessionId, teamId, locale, sentMessage.text!!)
             .map { chatMessageMapper.fromResponse(it) }
     }
 
-    fun sendAudioChatMessage(sentMessage: ChatMessage): Single<ChatMessage> {
+    fun sendAudioChatMessage(sentMessage: ChatMessage, locale: String): Single<ChatMessage> {
         val file = File(sentMessage.audioFilePath!!)
         val requestFile = file.asRequestBody("audio/amr".toMediaTypeOrNull())
         val part = MultipartBody.Part.createFormData("audio", file.name, requestFile)

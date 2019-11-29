@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class ChatBotViewModel @Inject constructor(private val context: Context,
@@ -78,7 +79,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendTextChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendTextChatMessage(chatMessage)
+            .sendTextChatMessage(chatMessage, Locale.getDefault().language)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
@@ -108,7 +109,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendAudioChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendAudioChatMessage(chatMessage)
+            .sendAudioChatMessage(chatMessage, Locale.getDefault().language)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
