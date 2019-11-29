@@ -71,9 +71,9 @@ class ChatBotActivity : AppCompatActivity() {
         }
         chatBotViewModel.onLoading().observe(this, Observer {loading ->
             if(loading)
-                botStatus.text = getString(R.string.status_writing)
+                botStatus.text = getString(R.string.chatbot_is_writing)
             else
-                botStatus.text = getString(R.string.status_online)
+                botStatus.text = getString(R.string.online)
         })
     }
 

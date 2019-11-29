@@ -54,7 +54,7 @@
                         style="@style/Toolbar.UserStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/status_online" />
+                        android:text="@string/online" />
 
                 </LinearLayout>
 
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:hint="@string/text_message_hint"
+                android:hint="@string/chatbot_placeholder_textinput"
                 android:imeOptions="actionSend"
                 android:importantForAutofill="no" />
 
@@ -92,7 +92,6 @@
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:alpha="0.5"
-                android:contentDescription="@string/send_text_message_description"
                 android:src="@drawable/ic_send" />
 
             <ImageButton
@@ -101,7 +100,6 @@
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
-                android:contentDescription="@string/send_audio_message_description"
                 android:src="@drawable/ic_mic" />
 
         </LinearLayout>

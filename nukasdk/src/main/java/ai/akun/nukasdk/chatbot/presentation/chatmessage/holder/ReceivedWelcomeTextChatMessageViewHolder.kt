@@ -19,7 +19,7 @@ class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageView
         itemView.content.text = chatMessage.text
 
         itemView.matchesAction.setOnClickListener {
-            val action = itemView.context.getString(R.string.matches)
+            val action = itemView.context.getString(R.string.next_match)
             addNewActionChatMessage(action)
         }
 

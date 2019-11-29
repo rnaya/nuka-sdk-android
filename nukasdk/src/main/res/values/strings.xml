@@ -1,17 +1,38 @@
 <resources>
+    <string name="chatbot_welcome_message">Welcome! You can ask me things like: \n - When is the next Match?, \n - How\'s the scoring?, \n - Give me Lionel Messi social networks</string>
+    <string name="chatbot_placeholder_textinput">Ask me something…</string>
+    <string name="next_match">Matches</string>
+    <string name="positions">Positions</string>
+    <string name="stats">Statistics</string>
+    <string name="players">Players</string>
+    <string name="next_match_question">Whats next?</string>
+    <string name="stats_question">Show me stats</string>
+    <string name="table_question">Show me the table</string>
+    <string name="players_question">Who are the team players?</string>
+    <string name="tickets">Tickets</string>
+    <string name="directions">Get Directions</string>
+    <string name="open_directions">Select the app that you want to use to get directions.</string>
+    <string name="venue">Stadium</string>
+    <string name="more">See more</string>
+    <string name="open">Open</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="liveticker_updates">There is a live match!. Do you want to keep updated with live ticker feed?</string>
+    <string name="no_information_available">Sorry, I don\'t have any info about that yet.</string>
+    <string name="Defender">Defender</string>
+    <string name="Goalkeeper">Goalkeeper</string>
+    <string name="Midfielder">Midfielder</string>
+    <string name="Forward">Forward</string>
+    <string name="off_substitution">In</string>
+    <string name="on_substitution">Out</string>
+    <string name="buy">Buy</string>
+    <string name="read_more">Read more…</string>
+    <string name="chatbot_is_writing">Writing…</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="no_connection">Oops! We cannot connect to the chatbot. Check your internet connection and try again.</string>
+    <string name="retry">Retry</string>
+
     <string name="app_name">Nuka SDK</string>
     <string name="bot_name">Nuka</string>
-    <string name="bot_description">Chat bot</string>
-    <string name="status_online">En línea</string>
-    <string name="status_writing">Escribiendo…</string>
-    <string name="welcome_message">Bienvenido! Me puedes preguntar cosas como:\n
-    - Cuando es el próximo partido?\n
-    - Cómo está el resultado?\n
-    - Dame las redes sociales de Lionel Messi</string>
-    <string name="matches">Partidos</string>
-    <string name="positions">Posiciones</string>
-    <string name="players">Jugadores</string>
-    <string name="send_text_message_description">Enviar mensaje de texto</string>
-    <string name="send_audio_message_description">Enviar mensaje de audio</string>
-    <string name="text_message_hint">Pregúntame algo…</string>
 </resources>

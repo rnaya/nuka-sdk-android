@@ -43,7 +43,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun addWelcomeChatMessage() {
         val welcomeChatMessage = ChatMessage(
-            text = context.getString(R.string.welcome_message),
+            text = context.getString(R.string.chatbot_welcome_message),
             type = ChatMessageType.RECEIVED_WELCOME
         )
         saveChatMessage(welcomeChatMessage)
