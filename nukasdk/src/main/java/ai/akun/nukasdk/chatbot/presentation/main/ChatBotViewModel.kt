@@ -17,6 +17,10 @@ import javax.inject.Inject
 class ChatBotViewModel @Inject constructor(private val context: Context,
                                            private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
 
+    //TODO get values
+    private val sessionId = 1
+    private val teamId = 1
+
     private val disposables = CompositeDisposable()
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
     private val chatMessagesLiveData = MutableLiveData<MutableList<ChatMessage>>()
@@ -79,7 +83,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendTextChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendTextChatMessage(chatMessage, Locale.getDefault().language)
+            .sendTextChatMessage(chatMessage, Locale.getDefault().language, sessionId, teamId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
@@ -109,7 +113,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendAudioChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendAudioChatMessage(chatMessage, Locale.getDefault().language)
+            .sendAudioChatMessage(chatMessage, Locale.getDefault().language, sessionId, teamId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->

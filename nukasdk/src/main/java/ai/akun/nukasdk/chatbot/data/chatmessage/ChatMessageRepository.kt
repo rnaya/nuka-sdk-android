@@ -6,16 +6,13 @@ import io.reactivex.Single
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import javax.inject.Inject
 
 class ChatMessageRepository @Inject constructor(private val chatMessageDao: ChatMessageDao,
                                                 private val chatMessageMapper: ChatMessageMapper,
                                                 private val chatMessageService: ChatMessageService) {
-
-    //TODO get values
-    private val sessionId = 1
-    private val teamId = 1
 
     fun getAllMessages() : Single<List<ChatMessage>> {
         return chatMessageDao.getAll().map { dbEntities -> dbEntities.map { chatMessageMapper.fromDb(it) } }
@@ -25,19 +22,32 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
         return chatMessageDao.insert(chatMessageMapper.toDb(message))
     }
 
-    fun sendTextChatMessage(sentMessage: ChatMessage, locale: String): Single<ChatMessage> {
+    fun sendTextChatMessage(
+        sentMessage: ChatMessage,
+        locale: String,
+        sessionId: Int,
+        teamId: Int
+    ): Single<ChatMessage> {
         return chatMessageService
-                .sendTextChatMessage(sessionId, teamId, locale, sentMessage.text!!)
+            .sendTextChatMessage(sessionId, teamId, locale, sentMessage.text!!)
             .map { chatMessageMapper.fromResponse(it) }
     }
 
-    fun sendAudioChatMessage(sentMessage: ChatMessage, locale: String): Single<ChatMessage> {
+    fun sendAudioChatMessage(
+        sentMessage: ChatMessage,
+        localeCode: String,
+        sessionId: Int,
+        teamId: Int
+    ): Single<ChatMessage> {
         val file = File(sentMessage.audioFilePath!!)
         val requestFile = file.asRequestBody("audio/amr".toMediaTypeOrNull())
-        val part = MultipartBody.Part.createFormData("audio", file.name, requestFile)
+        val filePart = MultipartBody.Part.createFormData("audio", file.name, requestFile)
+        val sessionIdPart = sessionId.toString().toRequestBody(MultipartBody.FORM)
+        val teamIdPart = teamId.toString().toRequestBody(MultipartBody.FORM)
+        val localePart = localeCode.toRequestBody(MultipartBody.FORM)
 
         return chatMessageService
-            .sendAudioChatMessage(sessionId, teamId, locale, part)
+            .sendAudioChatMessage(sessionIdPart, teamIdPart, localePart, filePart)
             .map { chatMessageMapper.fromResponse(it) }
     }
 }
