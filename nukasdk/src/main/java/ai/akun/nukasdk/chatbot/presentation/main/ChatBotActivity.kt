@@ -1,16 +1,21 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.ConnectivityReceiver
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import android.Manifest
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.doAfterTextChanged
@@ -23,10 +28,15 @@ import java.util.*
 import javax.inject.Inject
 
 
-class ChatBotActivity : AppCompatActivity() {
+class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
     companion object {
         const val RECORD_AUDIO_PERMISSION_REQUEST_CODE = 1
+    }
+
+    private val noConnectionMessageHandler = Handler()
+    private val noConnectionMessageRunnable = Runnable {
+        Toast.makeText(this, "Connection lost", Toast.LENGTH_SHORT).show()
     }
 
     @Inject
@@ -42,12 +52,27 @@ class ChatBotActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_bot)
 
         injectDependency()
+        setUpConnectivityChecks()
         setUpViewModel()
         setUpToolbar()
         setUpChatMessagesList()
         setUpMessageBar()
 
         getMessages()
+    }
+
+    private fun setUpConnectivityChecks() {
+        registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
+    }
+
+    override fun onStop() {
+        super.onStop()
+        noConnectionMessageHandler.removeCallbacks(noConnectionMessageRunnable)
     }
 
     private fun setUpViewModel() {
@@ -184,5 +209,18 @@ class ChatBotActivity : AppCompatActivity() {
 
     private fun scrollToLastMessage() {
         chatMessages.scrollToPosition(chatMessagesAdapter.itemCount - 1)
+    }
+
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        updateNetworkMessage(isConnected)
+    }
+
+    private fun updateNetworkMessage(isConnected: Boolean) {
+        if (!isConnected) {
+            noConnectionMessageHandler.postDelayed(noConnectionMessageRunnable,5000)
+        } else {
+            noConnectionMessageHandler.removeCallbacks(noConnectionMessageRunnable)
+            Toast.makeText(this, "Connected!", Toast.LENGTH_SHORT).show()
+        }
     }
 }
