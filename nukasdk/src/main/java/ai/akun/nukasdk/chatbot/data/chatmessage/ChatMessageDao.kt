@@ -1,5 +1,6 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
+import ai.akun.nukasdk.chatbot.data.chatmessage.entities.ChatMessageEntity
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query

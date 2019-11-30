@@ -1,4 +1,4 @@
-package ai.akun.nukasdk.chatbot.data.chatmessage
+package ai.akun.nukasdk.chatbot.data.chatmessage.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,5 +9,6 @@ data class ChatMessageEntity(
     val id: Int = 0,
     val text: String?,
     val audioFilePath: String?,
-    val intent: String
+    val intent: String,
+    val data: List<CardEntity>?
 )

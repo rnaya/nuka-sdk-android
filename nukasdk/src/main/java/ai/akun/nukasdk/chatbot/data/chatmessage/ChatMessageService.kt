@@ -39,7 +39,7 @@ data class ChatMessageIntent(
 
 
 data class FulfillmentMessage(
-    val card: Card
+    val card: Card?
 )
 
 data class Card(
