@@ -116,4 +116,32 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
+    <LinearLayout
+        android:id="@+id/noConnectivityMessage"
+        style="@style/NoConnectionMessage.Container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="30dp"
+            android:src="@drawable/ic_cloud_off_white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            style="@style/NoConnectionMessage.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:text="@string/no_connection"/>
+
+    </LinearLayout>
+
 </FrameLayout>

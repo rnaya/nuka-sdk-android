@@ -36,7 +36,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
 
     private val noConnectionMessageHandler = Handler()
     private val noConnectionMessageRunnable = Runnable {
-        Toast.makeText(this, "Connection lost", Toast.LENGTH_SHORT).show()
+        noConnectivityMessage.visibility = View.VISIBLE
     }
 
     @Inject
@@ -220,7 +220,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
             noConnectionMessageHandler.postDelayed(noConnectionMessageRunnable,5000)
         } else {
             noConnectionMessageHandler.removeCallbacks(noConnectionMessageRunnable)
-            Toast.makeText(this, "Connected!", Toast.LENGTH_SHORT).show()
+            noConnectivityMessage.visibility = View.GONE
         }
     }
 }

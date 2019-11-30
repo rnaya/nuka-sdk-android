@@ -6,6 +6,16 @@
         <item name="colorControlNormal">@color/accentBlue</item>
     </style>
 
+    <style name="NoConnectionMessage" />
+    <style name="NoConnectionMessage.Container">
+        <item name="android:background">#80000000</item>
+    </style>
+    <style name="NoConnectionMessage.Text">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="Toolbar" />
     <style name="Toolbar.UserName">
         <item name="android:textSize">22sp</item>
