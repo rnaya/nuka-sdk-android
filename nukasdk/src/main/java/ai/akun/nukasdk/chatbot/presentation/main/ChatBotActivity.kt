@@ -156,6 +156,7 @@ class ChatBotActivity : AppCompatActivity() {
             audioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
             audioRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB)
             audioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            audioRecorder.setAudioSamplingRate(8000)
 
             outputAudioFilePath = filesDir.absolutePath + "/${UUID.randomUUID()}.amr"
             audioRecorder.setOutputFile(outputAudioFilePath)
