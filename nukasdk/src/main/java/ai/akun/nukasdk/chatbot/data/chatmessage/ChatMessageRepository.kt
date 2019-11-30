@@ -24,12 +24,18 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
 
     fun sendTextChatMessage(
         sentMessage: ChatMessage,
-        locale: String,
+        localeCode: String,
         sessionId: Int,
         teamId: Int
     ): Single<ChatMessage> {
+
+        val sessionIdPart = sessionId.toString().toRequestBody(MultipartBody.FORM)
+        val teamIdPart = teamId.toString().toRequestBody(MultipartBody.FORM)
+        val localePart = localeCode.toRequestBody(MultipartBody.FORM)
+        val contentPart = sentMessage.text.toString().toRequestBody(MultipartBody.FORM)
+
         return chatMessageService
-            .sendTextChatMessage(sessionId, teamId, locale, sentMessage.text!!)
+            .sendTextChatMessage(sessionIdPart, teamIdPart, localePart, contentPart)
             .map { chatMessageMapper.fromResponse(it) }
     }
 

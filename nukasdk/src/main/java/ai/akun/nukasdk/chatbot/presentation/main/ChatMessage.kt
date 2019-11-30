@@ -8,11 +8,11 @@ import android.view.ViewGroup
 data class ChatMessage(
     val text: String? = null,
     val audioFilePath: String? = null,
-    val type: ChatMessageType,
+    val intent: ChatMessageIntent,
     val imageUri: String? = null
 )
 
-enum class ChatMessageType(val intent: String) : ViewHolderSource {
+enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
     SENT_TEXT("nuka.sent.text") {
         override fun getViewType() = 1
 

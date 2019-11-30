@@ -12,10 +12,10 @@ interface ChatMessageService {
 
     @Multipart
     @POST("handler/text.php")
-    fun sendTextChatMessage(@Part("sessionID") sessionId: Int,
-                            @Part("teamID") teamId: Int,
-                            @Part("locale") locale: String,
-                            @Part("content") textMessage: String): Single<ChatMessageResponse>
+    fun sendTextChatMessage(@Part("sessionID") sessionId: RequestBody,
+                            @Part("teamID") teamId: RequestBody,
+                            @Part("locale") locale: RequestBody,
+                            @Part("content") textMessage: RequestBody): Single<ChatMessageResponse>
 
     @Multipart
     @POST("handler/audio-android.php")

@@ -3,7 +3,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ChatMessageViewHolder
 import ai.akun.nukasdk.chatbot.presentation.main.ChatBotViewModel
-import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageType
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,12 +13,12 @@ class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessageViewHolder>() {
     private var chatBotViewModel: ChatBotViewModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageViewHolder {
-        val chatMessageType = ChatMessageType.values().find { it.getViewType() == viewType }
+        val chatMessageType = ChatMessageIntent.values().find { it.getViewType() == viewType }
         return chatMessageType?.getViewHolder(parent, chatBotViewModel)
-            ?: ChatMessageType.RECEIVED_TEXT.getViewHolder(parent, chatBotViewModel)
+            ?: ChatMessageIntent.RECEIVED_TEXT.getViewHolder(parent, chatBotViewModel)
     }
 
-    override fun getItemViewType(position: Int) = chatMessages[position].type.getViewType()
+    override fun getItemViewType(position: Int) = chatMessages[position].intent.getViewType()
 
     override fun getItemCount(): Int = chatMessages.size
 

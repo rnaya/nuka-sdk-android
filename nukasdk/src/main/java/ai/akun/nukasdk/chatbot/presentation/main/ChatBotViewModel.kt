@@ -1,9 +1,11 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.BuildConfig
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
 import android.content.Context
 import android.os.Handler
+import androidx.core.os.ConfigurationCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 class ChatBotViewModel @Inject constructor(private val context: Context,
@@ -49,13 +50,13 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
     private fun addWelcomeChatMessage() {
         val welcomeChatMessage = ChatMessage(
             text = context.getString(R.string.chatbot_welcome_message),
-            type = ChatMessageType.RECEIVED_WELCOME
+            intent = ChatMessageIntent.RECEIVED_WELCOME
         )
         saveChatMessage(welcomeChatMessage)
     }
 
     fun sendTextChatMessage(text: String) {
-        val chatMessage = ChatMessage(text = text, type = ChatMessageType.SENT_TEXT)
+        val chatMessage = ChatMessage(text = text, intent = ChatMessageIntent.SENT_TEXT)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
@@ -69,7 +70,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if(chatMessage.type != ChatMessageType.SENT_TEXT && chatMessage.type != ChatMessageType.SENT_AUDIO)
+                if(chatMessage.intent != ChatMessageIntent.SENT_TEXT && chatMessage.intent != ChatMessageIntent.SENT_AUDIO)
                     setLoading(false)
 
                 this.chatMessages.add(chatMessage)
@@ -83,7 +84,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendTextChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendTextChatMessage(chatMessage, Locale.getDefault().language, sessionId, teamId)
+            .sendTextChatMessage(chatMessage, getCurrentLocale(), sessionId, teamId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
@@ -102,7 +103,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
     }
 
     fun sendAudioChatMessage(audioFilePath: String) {
-        val chatMessage = ChatMessage(audioFilePath = audioFilePath, type = ChatMessageType.SENT_AUDIO)
+        val chatMessage = ChatMessage(audioFilePath = audioFilePath, intent = ChatMessageIntent.SENT_AUDIO)
         saveChatMessage(chatMessage)
 
         Handler().postDelayed({
@@ -113,7 +114,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun sendAudioChatMessageToServer(chatMessage: ChatMessage) {
         chatMessageRepository
-            .sendAudioChatMessage(chatMessage, Locale.getDefault().language, sessionId, teamId)
+            .sendAudioChatMessage(chatMessage, getCurrentLocale(), sessionId, teamId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ botChatMessageResponse ->
@@ -123,5 +124,9 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
                 Timber.e(error, "Error while sending chat message")
             })
             .also { disposables.add(it) }
+    }
+
+    private fun getCurrentLocale(): String {
+        return if (BuildConfig.DEBUG) "es" else ConfigurationCompat.getLocales(context.resources.configuration)[0].language
     }
 }
