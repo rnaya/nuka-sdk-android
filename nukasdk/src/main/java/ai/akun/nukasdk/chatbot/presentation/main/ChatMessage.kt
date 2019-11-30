@@ -9,7 +9,19 @@ data class ChatMessage(
     val text: String? = null,
     val audioFilePath: String? = null,
     val intent: ChatMessageIntent,
-    val imageUri: String? = null
+    val data: List<Card>? = null
+)
+
+data class Card(
+    val title: String,
+    val subtitle: String,
+    val imageUri: String,
+    val buttons: List<Button>?
+)
+
+data class Button(
+    val text: String,
+    val postback: String
 )
 
 enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {

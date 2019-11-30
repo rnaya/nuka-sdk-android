@@ -9,6 +9,7 @@ class ImageLoader {
 
     companion object {
 
+        //TODO error drawable
         fun load(imageUrl: String, imageView: ImageView) {
             val circularProgressDrawable = CircularProgressDrawable(imageView.context)
             circularProgressDrawable.strokeWidth = 10f

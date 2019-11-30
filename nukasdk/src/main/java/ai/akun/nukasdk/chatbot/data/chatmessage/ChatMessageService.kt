@@ -43,5 +43,13 @@ data class FulfillmentMessage(
 )
 
 data class Card(
-    val imageUri: String
+    val title: String,
+    val subtitle: String,
+    val imageUri: String,
+    val buttons: List<Button>?
+)
+
+data class Button(
+    val text: String,
+    val postback: String
 )
