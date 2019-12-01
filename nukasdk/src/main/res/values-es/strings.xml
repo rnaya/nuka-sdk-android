@@ -38,4 +38,8 @@
 
     <string name="app_name">Nuka SDK</string>
     <string name="bot_name">Nuka</string>
+    <string name="age">Edad</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
+    <string name="contract">Contrato</string>
 </resources>

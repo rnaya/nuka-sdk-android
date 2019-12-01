@@ -6,8 +6,10 @@ import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import ai.akun.nukasdk.chatbot.presentation.main.Match
+import ai.akun.nukasdk.chatbot.presentation.main.Player
 import ai.akun.nukasdk.chatbot.presentation.main.Team
 import ai.akun.nukasdk.chatbot.presentation.main.Venue
+import ai.akun.nukasdk.chatbot.presentation.main.WebhookPayload
 
 class ChatMessageMapper {
 
@@ -29,17 +31,31 @@ class ChatMessageMapper {
                     }
                 )
             },
-            webhookPayload = from.webhookPayload?.map {
-                MatchEntity(
-                    it.competition,
-                    it.identifier,
-                    it.scheduledDate,
-                    TeamEntity(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
-                    TeamEntity(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
-                    it.tickets,
-                    VenueEntity(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
-                )
-            }
+            webhookPayload = WebhookPayloadEntity(
+                from.webhookPayload?.matches?.map {
+                    MatchEntity(
+                        it.competition,
+                        it.identifier,
+                        it.scheduledDate,
+                        TeamEntity(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                        TeamEntity(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                        it.tickets,
+                        VenueEntity(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+                    )
+                },
+                from.webhookPayload?.players?.map {
+                    PlayerEntity(
+                        it.birthDate,
+                        it.birthplace,
+                        it.height,
+                        it.identifier,
+                        it.joinDate,
+                        it.name,
+                        it.position,
+                        it.weight
+                    )
+                }
+            )
         )
 
     fun fromDb(from: ChatMessageEntity) = ChatMessage(
@@ -59,17 +75,31 @@ class ChatMessageMapper {
                 }
             )
         },
-        webhookPayload = from.webhookPayload?.map {
-            Match(
-                it.competition,
-                it.identifier,
-                it.scheduledDate,
-                Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
-                Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
-                it.tickets,
-                Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
-            )
-        }
+        webhookPayload = WebhookPayload(
+            from.webhookPayload?.matches?.map {
+                Match(
+                    it.competition,
+                    it.identifier,
+                    it.scheduledDate,
+                    Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                    Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                    it.tickets,
+                    Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+                )
+            },
+            from.webhookPayload?.players?.map {
+                Player(
+                    it.birthDate,
+                    it.birthplace,
+                    it.height,
+                    it.identifier,
+                    it.joinDate,
+                    it.name,
+                    it.position,
+                    it.weight
+                )
+            }
+        )
     )
 
     fun fromResponse(from: ChatMessageResponse) = ChatMessage(
@@ -83,16 +113,30 @@ class ChatMessageMapper {
                 it.card?.buttons?.map { button ->
                     Button(button.text, button.postback)
                 }) },
-        webhookPayload = from.webhookPayload?.matches?.map {
-            Match(
-                it.competition,
-                it.identifier,
-                it.scheduledDate,
-                Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
-                Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
-                it.tickets,
-                Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
-            )
-        }
+        webhookPayload = WebhookPayload(
+            from.webhookPayload?.matches?.map {
+                Match(
+                    it.competition,
+                    it.identifier,
+                    it.scheduledDate,
+                    Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                    Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                    it.tickets,
+                    Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+                )
+            },
+            from.webhookPayload?.players?.map {
+                Player(
+                    it.birthDate,
+                    it.birthplace,
+                    it.height,
+                    it.identifier,
+                    it.joinDate,
+                    it.name,
+                    it.position,
+                    it.weight
+                )
+            }
+        )
     )
 }

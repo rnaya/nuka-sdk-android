@@ -38,7 +38,6 @@ data class ChatMessageIntent(
     val displayName: String
 )
 
-
 data class FulfillmentMessage(
     val card: Card?
 )
@@ -56,7 +55,8 @@ data class Button(
 )
 
 data class WebhookPayload(
-    val matches: List<Match>
+    val matches: List<Match>?,
+    val players: List<Player>
 )
 
 data class Match(
@@ -85,4 +85,16 @@ data class Venue(
     val latitude: Double?,
     val longitude: Double?,
     val name: String
+)
+
+data class Player(
+    @SerializedName("birthdate")
+    val birthDate: String?,
+    val birthplace: String?,
+    val height: Int?,
+    val identifier: String,
+    val joinDate: String?,
+    val name: String,
+    val position: String?,
+    val weight: Int?
 )

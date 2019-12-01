@@ -1,5 +1,11 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage.entities
 
+
+data class WebhookPayloadEntity(
+    val matches: List<MatchEntity>?,
+    val players: List<PlayerEntity>?
+)
+
 data class MatchEntity(
     val competition: String,
     val identifier: String,
@@ -22,4 +28,15 @@ data class VenueEntity(
     val latitude: Double?,
     val longitude: Double?,
     val name: String
+)
+
+data class PlayerEntity(
+    val birthDate: String?,
+    val birthplace: String?,
+    val height: Int?,
+    val identifier: String,
+    val joinDate: String?,
+    val name: String,
+    val position: String?,
+    val weight: Int?
 )

@@ -9,7 +9,7 @@ class ImageLoader {
 
     companion object {
 
-        fun load(imageUrl: String, imageView: ImageView) {
+        fun load(imageUrl: String, imageView: ImageView, errorPlaceholder: Int? = R.drawable.image_placeholder) {
             val circularProgressDrawable = CircularProgressDrawable(imageView.context)
             circularProgressDrawable.strokeWidth = 10f
             circularProgressDrawable.centerRadius = 25f
@@ -19,7 +19,7 @@ class ImageLoader {
             Glide.with(imageView.context)
                 .load(imageUrl)
                 .placeholder(circularProgressDrawable)
-                .error(R.drawable.image_placeholder)
+                .error(errorPlaceholder!!)
                 .into(imageView)
         }
 

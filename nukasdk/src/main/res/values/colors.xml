@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="accentBlue">#0270FF</color>
+    <color name="accentDarkBlue">#032963</color>
 
     <!--Message bar-->
     <color name="messageBarBackground">#F2F2F8</color>

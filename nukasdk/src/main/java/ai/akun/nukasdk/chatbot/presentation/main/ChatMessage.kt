@@ -11,8 +11,9 @@ data class ChatMessage(
     val audioFilePath: String? = null,
     val intent: ChatMessageIntent,
     val cardsPayload: List<Card>? = null,
-    val webhookPayload: List<Match>? = null
+    val webhookPayload: WebhookPayload? = null
     )
+
 
 data class Card(
     val title: String,
@@ -26,6 +27,10 @@ data class Button(
     val postback: String?
 )
 
+data class WebhookPayload(
+    val matches: List<Match>?,
+    val players: List<Player>?
+)
 
 data class Match(
     val competition: String,
@@ -49,6 +54,17 @@ data class Venue(
     val latitude: Double?,
     val longitude: Double?,
     val name: String
+)
+
+data class Player(
+    val birthDate: String?,
+    val birthplace: String?,
+    val height: Int?,
+    val identifier: String,
+    val joinDate: String?,
+    val name: String,
+    val position: String?,
+    val weight: Int?
 )
 
 enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
@@ -143,6 +159,19 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
             return ReceivedMatchesChatMessageViewHolder(
+                inflatedView
+            )
+        }
+    },
+    RECEIVED_PLAYERS("nuka.players.list") {
+        override fun getViewType() = 9
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
+            return ReceivedPlayersChatMessageViewHolder(
                 inflatedView
             )
         }

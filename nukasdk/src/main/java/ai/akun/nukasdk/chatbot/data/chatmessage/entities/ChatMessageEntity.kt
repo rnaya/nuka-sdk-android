@@ -1,5 +1,6 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage.entities
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,5 +12,6 @@ data class ChatMessageEntity(
     val audioFilePath: String?,
     val intent: String,
     val cardPayload: List<CardEntity>?,
-    val webhookPayload: List<MatchEntity>?
+    @Embedded
+    val webhookPayload: WebhookPayloadEntity?
 )
