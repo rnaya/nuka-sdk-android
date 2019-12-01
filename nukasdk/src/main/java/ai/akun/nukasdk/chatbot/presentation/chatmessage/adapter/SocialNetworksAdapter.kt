@@ -4,8 +4,11 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.shared.ImageLoader
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_row_social_network.view.*
 
@@ -37,6 +40,12 @@ class SocialNetworksAdapter :
             itemView.title.text = card.title
             itemView.socialNetwork.text = card.subtitle
             ImageLoader.load(card.imageUri, itemView.socialNetworkIcon)
+
+            itemView.open.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(card.buttons?.first()?.postback)
+                startActivity(itemView.context, intent, null)
+            }
         }
     }
 

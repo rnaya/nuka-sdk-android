@@ -16,6 +16,6 @@
     <dimen name="messageActionPadding">5dp</dimen>
     <dimen name="gifChatMessageWidth">220dp</dimen>
     <dimen name="gifChatMessageHeight">200dp</dimen>
-    <dimen name="socialNetworkIconSize">60dp</dimen>
+    <dimen name="socialNetworkIconSize">50dp</dimen>
 
 </resources>

@@ -96,6 +96,19 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
                 inflatedView
             )
         }
+    },
+    RECEIVED_SPOTIFY("nuka.spotify") {
+        override fun getViewType() = 7
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            chatBotViewModel: ChatBotViewModel?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_received_social_networks_chat_message, false)
+            return ReceivedSocialNetworksChatMessageViewHolder(
+                inflatedView
+            )
+        }
     }
 }
 

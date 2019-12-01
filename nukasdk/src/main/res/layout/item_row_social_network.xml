@@ -17,28 +17,31 @@
         <TextView
             android:id="@+id/title"
             style="@style/SocialNetwork.Title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/socialNetworkIcon"
             tools:text="Jeisson Vargas" />
 
         <TextView
             android:id="@+id/socialNetwork"
             style="@style/SocialNetwork.Subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/socialNetworkIcon"
             tools:text="Facebook"/>
 
         <ImageView
             android:id="@+id/socialNetworkIcon"
             android:layout_width="@dimen/socialNetworkIconSize"
             android:layout_height="@dimen/socialNetworkIconSize"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_facebook"
+            tools:src="@drawable/image_placeholder"
             tools:ignore="ContentDescription" />
 
         <Button
