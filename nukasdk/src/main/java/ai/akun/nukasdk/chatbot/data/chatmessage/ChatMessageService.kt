@@ -58,7 +58,8 @@ data class WebhookPayload(
     val matches: List<Match>?,
     val players: List<Player>?,
     val products: List<Product>?,
-    val articles: List<Article>?
+    val articles: List<Article>?,
+    val rankings: List<Ranking>?
 )
 
 data class Match(
@@ -117,4 +118,14 @@ data class Article(
     val subtitle: String,
     val title: String,
     val website: String
+)
+
+data class Ranking(
+    val drawn: Int,
+    val lost: Int,
+    val points: Int,
+    val position: Int,
+    val teamName: String,
+    val teamUid: String,
+    val won: Int
 )

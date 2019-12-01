@@ -61,4 +61,15 @@ class Converters {
     fun toArticlesJson(list: List<ArticleEntity?>?): String? {
         return Gson().toJson(list)
     }
+
+    @TypeConverter
+    fun toRankings(value: String?): List<RankingEntity?>? {
+        val listType = object : TypeToken<List<RankingEntity?>?>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun toRankingsJson(list: List<RankingEntity?>?): String? {
+        return Gson().toJson(list)
+    }
 }

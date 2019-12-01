@@ -9,6 +9,7 @@ import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import ai.akun.nukasdk.chatbot.presentation.main.Match
 import ai.akun.nukasdk.chatbot.presentation.main.Player
 import ai.akun.nukasdk.chatbot.presentation.main.Product
+import ai.akun.nukasdk.chatbot.presentation.main.Ranking
 import ai.akun.nukasdk.chatbot.presentation.main.Team
 import ai.akun.nukasdk.chatbot.presentation.main.Venue
 import ai.akun.nukasdk.chatbot.presentation.main.WebhookPayload
@@ -76,6 +77,17 @@ class ChatMessageMapper {
                         it.title,
                         it.website
                     )
+                },
+                from.webhookPayload?.rankings?.map {
+                    RankingEntity(
+                        it.drawn,
+                        it.lost,
+                        it.points,
+                        it.position,
+                        it.teamName,
+                        it.teamUid,
+                        it.won
+                    )
                 }
             )
         )
@@ -140,6 +152,17 @@ class ChatMessageMapper {
                     it.title,
                     it.website
                 )
+            },
+            from.webhookPayload?.rankings?.map {
+                Ranking(
+                    it.drawn,
+                    it.lost,
+                    it.points,
+                    it.position,
+                    it.teamName,
+                    it.teamUid,
+                    it.won
+                )
             }
         )
     )
@@ -197,6 +220,17 @@ class ChatMessageMapper {
                     it.subtitle,
                     it.title,
                     it.website
+                )
+            },
+            from.webhookPayload?.rankings?.map {
+                Ranking(
+                    it.drawn,
+                    it.lost,
+                    it.points,
+                    it.position,
+                    it.teamName,
+                    it.teamUid,
+                    it.won
                 )
             }
         )

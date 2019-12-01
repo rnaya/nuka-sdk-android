@@ -5,7 +5,8 @@ data class WebhookPayloadEntity(
     val matches: List<MatchEntity>?,
     val players: List<PlayerEntity>?,
     val products: List<ProductEntity>?,
-    val articles: List<ArticleEntity>?
+    val articles: List<ArticleEntity>?,
+    val rankings: List<RankingEntity>?
 )
 
 data class MatchEntity(
@@ -59,4 +60,14 @@ data class ArticleEntity(
     val subtitle: String,
     val title: String,
     val website: String
+)
+
+data class RankingEntity(
+    val drawn: Int,
+    val lost: Int,
+    val points: Int,
+    val position: Int,
+    val teamName: String,
+    val teamUid: String,
+    val won: Int
 )
