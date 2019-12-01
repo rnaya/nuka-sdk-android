@@ -4,7 +4,8 @@ package ai.akun.nukasdk.chatbot.data.chatmessage.entities
 data class WebhookPayloadEntity(
     val matches: List<MatchEntity>?,
     val players: List<PlayerEntity>?,
-    val products: List<ProductEntity>?
+    val products: List<ProductEntity>?,
+    val articles: List<ArticleEntity>?
 )
 
 data class MatchEntity(
@@ -47,6 +48,15 @@ data class ProductEntity(
     val description: String,
     val image: String,
     val price: Double,
+    val title: String,
+    val website: String
+)
+
+data class ArticleEntity(
+    val category: String,
+    val image: String,
+    val publishedAt: String,
+    val subtitle: String,
     val title: String,
     val website: String
 )

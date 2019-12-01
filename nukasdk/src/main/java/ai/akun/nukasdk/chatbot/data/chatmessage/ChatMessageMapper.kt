@@ -1,6 +1,7 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
 import ai.akun.nukasdk.chatbot.data.chatmessage.entities.*
+import ai.akun.nukasdk.chatbot.presentation.main.Article
 import ai.akun.nukasdk.chatbot.presentation.main.Button
 import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
@@ -65,6 +66,16 @@ class ChatMessageMapper {
                         it.title,
                         it.website
                     )
+                },
+                from.webhookPayload?.articles?.map {
+                    ArticleEntity(
+                        it.category,
+                        it.image,
+                        it.publishedAt,
+                        it.subtitle,
+                        it.title,
+                        it.website
+                    )
                 }
             )
         )
@@ -119,6 +130,16 @@ class ChatMessageMapper {
                     it.title,
                     it.website
                 )
+            },
+            from.webhookPayload?.articles?.map {
+                Article(
+                    it.category,
+                    it.image,
+                    it.publishedAt,
+                    it.subtitle,
+                    it.title,
+                    it.website
+                )
             }
         )
     )
@@ -164,6 +185,16 @@ class ChatMessageMapper {
                     it.description,
                     it.image,
                     it.price,
+                    it.title,
+                    it.website
+                )
+            },
+            from.webhookPayload?.articles?.map {
+                Article(
+                    it.category,
+                    it.image,
+                    it.publishedAt,
+                    it.subtitle,
                     it.title,
                     it.website
                 )

@@ -57,7 +57,8 @@ data class Button(
 data class WebhookPayload(
     val matches: List<Match>?,
     val players: List<Player>?,
-    val products: List<Product>?
+    val products: List<Product>?,
+    val articles: List<Article>?
 )
 
 data class Match(
@@ -105,6 +106,15 @@ data class Product(
     val description: String,
     val image: String,
     val price: Double,
+    val title: String,
+    val website: String
+)
+
+data class Article(
+    val category: String,
+    val image: String,
+    val publishedAt: String,
+    val subtitle: String,
     val title: String,
     val website: String
 )
