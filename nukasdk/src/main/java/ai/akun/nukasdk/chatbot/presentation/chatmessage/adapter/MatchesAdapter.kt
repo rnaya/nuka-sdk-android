@@ -42,7 +42,7 @@ class MatchesAdapter :
             ImageLoader.load(getTeamLogoUrl(match.homeTeam.identifier), itemView.homeTeamImage)
             itemView.homeTeamShortName.text = match.homeTeam.shortName
             itemView.scheduledDate.text = match.scheduledDate
-            ImageLoader.load(getTeamLogoUrl(match.awayTeam.identifier), itemView.awayTeamImage)
+            ImageLoader.load(getTeamLogoUrl(match.awayTeam.identifier), itemView.awayTeamImage, R.drawable.ic_shield)
             itemView.awayTeamShortName.text = match.awayTeam.shortName
         }
 
