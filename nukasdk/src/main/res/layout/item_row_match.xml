@@ -61,6 +61,7 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/homeTeamShortName"
                     style="@style/ChatMessage.Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,25 +70,15 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
+                android:id="@+id/scheduledDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    tools:text="30.07.2017" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    tools:text="01:30" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                tools:text="30.07.2017 01:30" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -105,6 +96,7 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/awayTeamShortName"
                     style="@style/ChatMessage.Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -5,6 +5,9 @@ import ai.akun.nukasdk.chatbot.presentation.main.Button
 import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
+import ai.akun.nukasdk.chatbot.presentation.main.Match
+import ai.akun.nukasdk.chatbot.presentation.main.Team
+import ai.akun.nukasdk.chatbot.presentation.main.Venue
 
 class ChatMessageMapper {
 
@@ -55,6 +58,17 @@ class ChatMessageMapper {
                     )
                 }
             )
+        },
+        webhookPayload = from.webhookPayload?.map {
+            Match(
+                it.competition,
+                it.identifier,
+                it.scheduledDate,
+                Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                it.tickets,
+                Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+            )
         }
     )
 
@@ -68,6 +82,17 @@ class ChatMessageMapper {
                 it.card?.imageUri ?: "",
                 it.card?.buttons?.map { button ->
                     Button(button.text, button.postback)
-                }) }
+                }) },
+        webhookPayload = from.webhookPayload?.matches?.map {
+            Match(
+                it.competition,
+                it.identifier,
+                it.scheduledDate,
+                Team(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                Team(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                it.tickets,
+                Venue(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+            )
+        }
     )
 }

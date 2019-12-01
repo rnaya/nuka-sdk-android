@@ -13,7 +13,7 @@ class ReceivedMatchesChatMessageViewHolder(itemView: View) : ChatMessageViewHold
         itemView.scrollableList.layoutManager =
             LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
         itemView.scrollableList.adapter = adapter
-        adapter.load(chatMessage.cardsPayload!!)
+        adapter.load(chatMessage.webhookPayload!!)
     }
 
 }
