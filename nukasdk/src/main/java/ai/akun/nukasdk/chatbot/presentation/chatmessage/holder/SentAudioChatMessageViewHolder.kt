@@ -1,7 +1,6 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
 import ai.akun.nukasdk.R
-import ai.akun.nukasdk.chatbot.presentation.main.ChatBotViewModel
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import android.graphics.PorterDuff
 import android.media.MediaPlayer
@@ -10,7 +9,6 @@ import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.item_row_sent_audio_chat_message.view.*
 import java.util.concurrent.TimeUnit
-
 
 class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
@@ -24,7 +22,7 @@ class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(ite
         }
     }
 
-    override fun bind(chatMessage: ChatMessage) {
+    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
         mediaPlayer = MediaPlayer()
         mediaPlayer.setDataSource(chatMessage.audioFilePath)
         mediaPlayer.prepare()
@@ -45,9 +43,6 @@ class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(ite
         }
 
     }
-
-    override fun setViewModel(chatBotViewModel: ChatBotViewModel) { }
-
 
     private fun setUpAudioSeekBar() {
         itemView.audioProgressSeekBar.setOnTouchListener { _, _ -> true }

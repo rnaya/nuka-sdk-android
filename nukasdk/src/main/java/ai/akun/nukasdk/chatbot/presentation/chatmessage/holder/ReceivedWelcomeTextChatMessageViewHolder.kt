@@ -9,13 +9,10 @@ import kotlinx.android.synthetic.main.item_row_received_welcome_text_chat_messag
 
 class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
-    private lateinit var chatBotViewModel: ChatBotViewModel
+    private lateinit var onSendNewMessage: ((String) -> Unit)
 
-    override fun setViewModel(chatBotViewModel: ChatBotViewModel) {
-        this.chatBotViewModel = chatBotViewModel
-    }
-
-    override fun bind(chatMessage: ChatMessage) {
+    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
+        this.onSendNewMessage = onSendNewMessage!!
         itemView.content.text = chatMessage.text
 
         itemView.matchesAction.setOnClickListener {
@@ -35,7 +32,7 @@ class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageView
     }
 
     private fun addNewActionChatMessage(actionText: String) {
-        chatBotViewModel.sendTextChatMessage(actionText)
+        onSendNewMessage.invoke(actionText)
     }
 
 }

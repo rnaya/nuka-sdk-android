@@ -107,9 +107,8 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         layoutManager.stackFromEnd = true
         chatMessages.layoutManager = layoutManager
 
-        chatMessagesAdapter = ChatMessagesAdapter()
+        chatMessagesAdapter = ChatMessagesAdapter(::sendTextMessage)
         chatMessages.adapter = chatMessagesAdapter
-        chatMessagesAdapter.setViewModel(chatBotViewModel)
 
         chatBotViewModel.onChatMessagesUpdated().observe(this, Observer {
             loadMessages(it)

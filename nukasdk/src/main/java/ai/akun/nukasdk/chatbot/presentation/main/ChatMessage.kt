@@ -31,7 +31,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_sent_text_chat_message, false)
             return SentTextChatMessageViewHolder(inflatedView)
@@ -42,7 +42,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_sent_audio_chat_message, false)
             return SentAudioChatMessageViewHolder(inflatedView)
@@ -53,13 +53,11 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView =
                 parent.inflate(R.layout.item_row_received_welcome_text_chat_message, false)
-            val viewHolder = ReceivedWelcomeTextChatMessageViewHolder(inflatedView)
-            viewHolder.setViewModel(chatBotViewModel!!)
-            return viewHolder
+            return ReceivedWelcomeTextChatMessageViewHolder(inflatedView)
         }
     },
     RECEIVED_TEXT("nuka.text") {
@@ -67,7 +65,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_text_chat_message, false)
             return ReceivedTextChatMessageViewHolder(inflatedView)
@@ -78,7 +76,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_gif_chat_message, false)
             return ReceivedGifChatMessageViewHolder(inflatedView)
@@ -89,7 +87,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_social_networks_chat_message, false)
             return ReceivedSocialNetworksChatMessageViewHolder(
@@ -102,7 +100,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(
             parent: ViewGroup,
-            chatBotViewModel: ChatBotViewModel?
+            onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_social_networks_chat_message, false)
             return ReceivedSocialNetworksChatMessageViewHolder(
@@ -116,6 +114,6 @@ interface ViewHolderSource {
     fun getViewType(): Int
     fun getViewHolder(
         parent: ViewGroup,
-        chatBotViewModel: ChatBotViewModel? = null
+        onSendNewMessage: ((String) -> Unit)? = null
     ): ChatMessageViewHolder
 }
