@@ -29,7 +29,8 @@ data class Button(
 
 data class WebhookPayload(
     val matches: List<Match>?,
-    val players: List<Player>?
+    val players: List<Player>?,
+    val products: List<Product>?
 )
 
 data class Match(
@@ -65,6 +66,15 @@ data class Player(
     val name: String,
     val position: String?,
     val weight: Int?
+)
+
+data class Product(
+    val category: String,
+    val description: String,
+    val image: String,
+    val price: Double,
+    val title: String,
+    val website: String
 )
 
 enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {

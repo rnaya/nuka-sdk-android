@@ -7,6 +7,7 @@ import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import ai.akun.nukasdk.chatbot.presentation.main.Match
 import ai.akun.nukasdk.chatbot.presentation.main.Player
+import ai.akun.nukasdk.chatbot.presentation.main.Product
 import ai.akun.nukasdk.chatbot.presentation.main.Team
 import ai.akun.nukasdk.chatbot.presentation.main.Venue
 import ai.akun.nukasdk.chatbot.presentation.main.WebhookPayload
@@ -54,6 +55,16 @@ class ChatMessageMapper {
                         it.position,
                         it.weight
                     )
+                },
+                from.webhookPayload?.products?.map {
+                    ProductEntity(
+                        it.category,
+                        it.description,
+                        it.image,
+                        it.price,
+                        it.title,
+                        it.website
+                    )
                 }
             )
         )
@@ -98,6 +109,16 @@ class ChatMessageMapper {
                     it.position,
                     it.weight
                 )
+            },
+            from.webhookPayload?.products?.map {
+                Product(
+                    it.category,
+                    it.description,
+                    it.image,
+                    it.price,
+                    it.title,
+                    it.website
+                )
             }
         )
     )
@@ -135,6 +156,16 @@ class ChatMessageMapper {
                     it.name,
                     it.position,
                     it.weight
+                )
+            },
+            from.webhookPayload?.products?.map {
+                Product(
+                    it.category,
+                    it.description,
+                    it.image,
+                    it.price,
+                    it.title,
+                    it.website
                 )
             }
         )

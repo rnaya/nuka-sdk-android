@@ -3,6 +3,7 @@ package ai.akun.nukasdk.chatbot.data
 import ai.akun.nukasdk.chatbot.data.chatmessage.entities.CardEntity
 import ai.akun.nukasdk.chatbot.data.chatmessage.entities.MatchEntity
 import ai.akun.nukasdk.chatbot.data.chatmessage.entities.PlayerEntity
+import ai.akun.nukasdk.chatbot.data.chatmessage.entities.ProductEntity
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -39,6 +40,17 @@ class Converters {
 
     @TypeConverter
     fun toPlayersJson(list: List<PlayerEntity?>?): String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun toProducts(value: String?): List<ProductEntity?>? {
+        val listType = object : TypeToken<List<ProductEntity?>?>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun toProductsJson(list: List<ProductEntity?>?): String? {
         return Gson().toJson(list)
     }
 }
