@@ -2,6 +2,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.Card
+import ai.akun.nukasdk.chatbot.presentation.shared.ImageLoader
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,9 @@ class SocialNetworksAdapter :
 
     class SocialNetworkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(card: Card) {
-            itemView.description.text = card.title
+            itemView.title.text = card.title
+            itemView.socialNetwork.text = card.subtitle
+            ImageLoader.load(card.imageUri, itemView.socialNetworkIcon)
         }
     }
 

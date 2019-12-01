@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="bottom">
 
-    <LinearLayout
-        android:id="@+id/socialNetworksContainer"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/socialNetworks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom">
-
-        <ai.akun.nukasdk.chatbot.presentation.shared.ChatBotAvatarView
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginStart="5dp"
-            android:padding="5dp"
-            tools:layout_height="40dp"
-            tools:layout_width="40dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/socialNetworks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/messageCardMargin"/>
-
-    </LinearLayout>
+        android:layout_margin="@dimen/messageCardMargin" />
 
     <include
         android:id="@+id/messageContainer"

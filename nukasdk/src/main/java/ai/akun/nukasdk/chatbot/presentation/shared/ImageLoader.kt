@@ -9,7 +9,6 @@ class ImageLoader {
 
     companion object {
 
-        //TODO error drawable
         fun load(imageUrl: String, imageView: ImageView) {
             val circularProgressDrawable = CircularProgressDrawable(imageView.context)
             circularProgressDrawable.strokeWidth = 10f
@@ -20,6 +19,7 @@ class ImageLoader {
             Glide.with(imageView.context)
                 .load(imageUrl)
                 .placeholder(circularProgressDrawable)
+                .error(R.drawable.image_placeholder)
                 .into(imageView)
         }
 

@@ -12,7 +12,7 @@ class ReceivedSocialNetworksChatMessageViewHolder(itemView: View) : ChatMessageV
 
     override fun bind(chatMessage: ChatMessage) {
         if(!chatMessage.text.isNullOrBlank()) {
-            itemView.socialNetworksContainer.visibility = View.GONE
+            itemView.socialNetworks.visibility = View.GONE
             itemView.messageContainer.visibility = View.VISIBLE
             itemView.content.text = chatMessage.text
         } else {
