@@ -22,7 +22,7 @@ data class Card(
 
 data class Button(
     val text: String,
-    val postback: String
+    val postback: String?
 )
 
 enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
@@ -89,7 +89,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
             parent: ViewGroup,
             onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
-            val inflatedView = parent.inflate(R.layout.item_row_received_social_networks_chat_message, false)
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
             return ReceivedSocialNetworksChatMessageViewHolder(
                 inflatedView
             )
@@ -102,8 +102,21 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
             parent: ViewGroup,
             onSendNewMessage: ((String) -> Unit)?
         ): ChatMessageViewHolder {
-            val inflatedView = parent.inflate(R.layout.item_row_received_social_networks_chat_message, false)
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
             return ReceivedSocialNetworksChatMessageViewHolder(
+                inflatedView
+            )
+        }
+    },
+    RECEIVED_MATCHES("nuka.matches.next") {
+        override fun getViewType() = 8
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
+            return ReceivedMatchesChatMessageViewHolder(
                 inflatedView
             )
         }

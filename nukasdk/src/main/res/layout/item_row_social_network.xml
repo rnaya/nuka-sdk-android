@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/SocialNetwork.Title"
+            style="@style/ChatMessage.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/socialNetwork"
-            style="@style/SocialNetwork.Subtitle"
+            style="@style/ChatMessage.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

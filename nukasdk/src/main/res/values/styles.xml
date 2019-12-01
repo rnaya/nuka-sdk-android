@@ -39,19 +39,17 @@
     </style>
 
     <style name="ChatMessage" />
+    <style name="ChatMessage.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="ChatMessage.Subtitle">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
     <style name="ChatMessage.Action">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:background">@drawable/bg_rounded_accent_blue</item>
     </style>
 
-    <!-- Social network-->
-    <style name="SocialNetwork" />
-    <style name="SocialNetwork.Title">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-    <style name="SocialNetwork.Subtitle">
-        <item name="android:textColor">@android:color/black</item>
-    </style>
 </resources>
