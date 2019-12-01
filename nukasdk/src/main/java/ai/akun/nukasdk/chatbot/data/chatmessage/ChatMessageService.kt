@@ -28,61 +28,61 @@ interface ChatMessageService {
 data class ChatMessageResponse(
     @SerializedName("fulfillmentText")
     val text: String?,
-    val intent: ChatMessageIntent,
-    val fulfillmentMessages: List<FulfillmentMessage>?,
-    val webhookPayload: WebhookPayload?
+    val intent: ChatMessageIntentResponse,
+    val fulfillmentMessages: List<FulfillmentMessageResponse>?,
+    val webhookPayload: WebhookPayloadResponse?
 )
 
-data class ChatMessageIntent(
+data class ChatMessageIntentResponse(
     val name: String,
     val displayName: String
 )
 
-data class FulfillmentMessage(
-    val card: Card?
+data class FulfillmentMessageResponse(
+    val card: CardResponse?
 )
 
-data class Card(
+data class CardResponse(
     val title: String,
     val subtitle: String,
     val imageUri: String,
-    val buttons: List<Button>?
+    val buttons: List<ButtonResponse>?
 )
 
-data class Button(
+data class ButtonResponse(
     val text: String,
     val postback: String
 )
 
-data class WebhookPayload(
-    val matches: List<Match>?,
-    val players: List<Player>?,
-    val products: List<Product>?,
-    val articles: List<Article>?,
-    val rankings: List<Ranking>?
+data class WebhookPayloadResponse(
+    val matches: List<MatchResponse>?,
+    val players: List<PlayerResponse>?,
+    val products: List<ProductResponse>?,
+    val articles: List<ArticleResponse>?,
+    val rankings: List<RankingResponse>?
 )
 
-data class Match(
+data class MatchResponse(
     val competition: String,
     val identifier: String,
     @SerializedName("scheduled_date")
     val scheduledDate: String,
     @SerializedName("team_away")
-    val awayTeam: Team,
+    val awayTeam: TeamResponse,
     @SerializedName("team_home")
-    val homeTeam: Team,
+    val homeTeam: TeamResponse,
     val tickets: String?,
-    val venue: Venue
+    val venue: VenueResponse
 )
 
-data class Team(
+data class TeamResponse(
     val identifier: String,
     val name: String,
     @SerializedName("short_name")
     val shortName: String
 )
 
-data class Venue(
+data class VenueResponse(
     val address: String?,
     val identifier: String,
     val latitude: Double?,
@@ -90,7 +90,7 @@ data class Venue(
     val name: String
 )
 
-data class Player(
+data class PlayerResponse(
     @SerializedName("birthdate")
     val birthDate: String?,
     val birthplace: String?,
@@ -102,7 +102,7 @@ data class Player(
     val weight: Int?
 )
 
-data class Product(
+data class ProductResponse(
     val category: String,
     val description: String,
     val image: String,
@@ -111,7 +111,7 @@ data class Product(
     val website: String
 )
 
-data class Article(
+data class ArticleResponse(
     val category: String,
     val image: String,
     val publishedAt: String,
@@ -120,7 +120,7 @@ data class Article(
     val website: String
 )
 
-data class Ranking(
+data class RankingResponse(
     val drawn: Int,
     val lost: Int,
     val points: Int,
