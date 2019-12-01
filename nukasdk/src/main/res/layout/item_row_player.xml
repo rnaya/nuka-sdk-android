@@ -9,18 +9,6 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="@dimen/messageCardElevation">
 
-    <TextView
-        android:id="@+id/position"
-        style="@style/ChatMessage.PlayerPosition"
-        android:padding="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/Goalkeeper"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:padding="10dp"
@@ -152,5 +140,17 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/position"
+        style="@style/ChatMessage.PlayerPosition"
+        android:padding="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@string/Goalkeeper"/>
 
 </androidx.cardview.widget.CardView>

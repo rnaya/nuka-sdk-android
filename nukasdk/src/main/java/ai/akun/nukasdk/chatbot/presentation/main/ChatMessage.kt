@@ -206,6 +206,19 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
                 inflatedView
             )
         }
+    },
+    RECEIVED_PRODUCTS("nuka.buy.fanshop") {
+        override fun getViewType() = 10
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
+            return ReceivedProductsChatMessageViewHolder(
+                inflatedView
+            )
+        }
     }
 }
 
