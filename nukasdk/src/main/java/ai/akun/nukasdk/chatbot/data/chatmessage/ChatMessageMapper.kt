@@ -1,8 +1,6 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
-import ai.akun.nukasdk.chatbot.data.chatmessage.entities.ButtonEntity
-import ai.akun.nukasdk.chatbot.data.chatmessage.entities.CardEntity
-import ai.akun.nukasdk.chatbot.data.chatmessage.entities.ChatMessageEntity
+import ai.akun.nukasdk.chatbot.data.chatmessage.entities.*
 import ai.akun.nukasdk.chatbot.presentation.main.Button
 import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
@@ -15,7 +13,7 @@ class ChatMessageMapper {
             text = from.text,
             audioFilePath = from.audioFilePath,
             intent = from.intent.displayName,
-            data = from.data?.map {
+            cardPayload = from.cardsPayload?.map {
                 CardEntity(
                     it.title,
                     it.subtitle,
@@ -27,6 +25,17 @@ class ChatMessageMapper {
                         )
                     }
                 )
+            },
+            webhookPayload = from.webhookPayload?.map {
+                MatchEntity(
+                    it.competition,
+                    it.identifier,
+                    it.scheduledDate,
+                    TeamEntity(it.awayTeam.identifier, it.awayTeam.name, it.awayTeam.shortName),
+                    TeamEntity(it.homeTeam.identifier, it.homeTeam.name, it.homeTeam.shortName),
+                    it.tickets,
+                    VenueEntity(it.venue.address, it.venue.identifier, it.venue.latitude, it.venue.longitude, it.venue.name)
+                )
             }
         )
 
@@ -34,7 +43,7 @@ class ChatMessageMapper {
         from.text,
         from.audioFilePath,
         ChatMessageIntent.values().firstOrNull { it.displayName == from.intent } ?: ChatMessageIntent.RECEIVED_TEXT,
-        from.data?.map {
+        from.cardPayload?.map {
             Card(
                 it.title,
                 it.subtitle,
@@ -52,7 +61,7 @@ class ChatMessageMapper {
     fun fromResponse(from: ChatMessageResponse) = ChatMessage(
         text = from.text,
         intent = ChatMessageIntent.values().firstOrNull { it.displayName == from.intent.displayName } ?: ChatMessageIntent.RECEIVED_TEXT,
-        data = from.fulfillmentMessages?.map {
+        cardsPayload = from.fulfillmentMessages?.map {
             Card(
                 it.card?.title ?: "",
                 it.card?.subtitle ?: "",

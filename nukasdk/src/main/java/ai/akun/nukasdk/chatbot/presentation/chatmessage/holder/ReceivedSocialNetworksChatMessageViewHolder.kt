@@ -18,7 +18,7 @@ class ReceivedSocialNetworksChatMessageViewHolder(itemView: View) : ChatMessageV
             val adapter = SocialNetworksAdapter()
             itemView.scrollableList.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             itemView.scrollableList.adapter = adapter
-            adapter.load(chatMessage.data!!)
+            adapter.load(chatMessage.cardsPayload!!)
         }
     }
 

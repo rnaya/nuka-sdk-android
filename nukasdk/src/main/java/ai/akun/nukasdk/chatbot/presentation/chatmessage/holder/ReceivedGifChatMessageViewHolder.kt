@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_row_received_gif_chat_message.view.*
 class ReceivedGifChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
-        ImageLoader.load(chatMessage.data?.get(0)?.imageUri ?: "", itemView.gif)
+        ImageLoader.load(chatMessage.cardsPayload?.get(0)?.imageUri ?: "", itemView.gif)
     }
 
 }

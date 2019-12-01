@@ -6,3 +6,8 @@ data class CardEntity (
     val imageUri: String,
     val buttons: List<ButtonEntity>?
 )
+
+data class ButtonEntity (
+    val text: String,
+    val postback: String?
+)

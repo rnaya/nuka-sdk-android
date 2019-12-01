@@ -10,8 +10,9 @@ data class ChatMessage(
     val text: String? = null,
     val audioFilePath: String? = null,
     val intent: ChatMessageIntent,
-    val data: List<Card>? = null
-)
+    val cardsPayload: List<Card>? = null,
+    val webhookPayload: List<Match>? = null
+    )
 
 data class Card(
     val title: String,
@@ -23,6 +24,31 @@ data class Card(
 data class Button(
     val text: String,
     val postback: String?
+)
+
+
+data class Match(
+    val competition: String,
+    val identifier: String,
+    val scheduledDate: String,
+    val awayTeam: Team,
+    val homeTeam: Team,
+    val tickets: String?,
+    val venue: Venue
+)
+
+data class Team(
+    val identifier: String,
+    val name: String,
+    val shortName: String
+)
+
+data class Venue(
+    val address: String?,
+    val identifier: String,
+    val latitude: Double?,
+    val longitude: Double?,
+    val name: String
 )
 
 enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {

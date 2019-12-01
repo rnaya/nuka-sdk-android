@@ -29,7 +29,8 @@ data class ChatMessageResponse(
     @SerializedName("fulfillmentText")
     val text: String?,
     val intent: ChatMessageIntent,
-    val fulfillmentMessages: List<FulfillmentMessage>?
+    val fulfillmentMessages: List<FulfillmentMessage>?,
+    val webhookPayload: WebhookPayload?
 )
 
 data class ChatMessageIntent(
@@ -52,4 +53,36 @@ data class Card(
 data class Button(
     val text: String,
     val postback: String
+)
+
+data class WebhookPayload(
+    val matches: List<Match>
+)
+
+data class Match(
+    val competition: String,
+    val identifier: String,
+    @SerializedName("scheduled_date")
+    val scheduledDate: String,
+    @SerializedName("team_away")
+    val awayTeam: Team,
+    @SerializedName("team_home")
+    val homeTeam: Team,
+    val tickets: String?,
+    val venue: Venue
+)
+
+data class Team(
+    val identifier: String,
+    val name: String,
+    @SerializedName("short_name")
+    val shortName: String
+)
+
+data class Venue(
+    val address: String?,
+    val identifier: String,
+    val latitude: Double?,
+    val longitude: Double?,
+    val name: String
 )

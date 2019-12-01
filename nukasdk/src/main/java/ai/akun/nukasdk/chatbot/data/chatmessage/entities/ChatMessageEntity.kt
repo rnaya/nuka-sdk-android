@@ -10,5 +10,6 @@ data class ChatMessageEntity(
     val text: String?,
     val audioFilePath: String?,
     val intent: String,
-    val data: List<CardEntity>?
+    val cardPayload: List<CardEntity>?,
+    val webhookPayload: List<MatchEntity>?
 )
