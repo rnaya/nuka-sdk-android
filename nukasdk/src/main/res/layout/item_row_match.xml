@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/homeTeamImage"
+                    android:id="@+id/homeTeamShield"
                     android:layout_width="@dimen/socialNetworkIconSize"
                     android:layout_height="@dimen/socialNetworkIconSize"
                     android:scaleType="centerInside"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/awayTeamImage"
+                    android:id="@+id/awayTeamShield"
                     android:layout_width="@dimen/socialNetworkIconSize"
                     android:layout_height="@dimen/socialNetworkIconSize"
                     android:scaleType="centerInside"

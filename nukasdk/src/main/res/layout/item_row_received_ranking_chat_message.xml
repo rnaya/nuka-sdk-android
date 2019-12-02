@@ -7,7 +7,7 @@
     android:gravity="bottom">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minWidth="@dimen/minMessageCardWidth"
         android:minHeight="@dimen/minMessageCardHeight"
@@ -15,14 +15,55 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="@dimen/messageCardElevation">
 
-        <TextView
-            android:id="@+id/content"
+        <LinearLayout
+            android:id="@+id/rankingContainer"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/textMessageSize"
-            tools:text="Hi, this is a text from the bot, enjoy!" />
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/ChatMessage.RankingItem"
+                    android:layout_width="@dimen/rankingItemWidth"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abbr_points"/>
+
+                <TextView
+                    style="@style/ChatMessage.RankingItem"
+                    android:layout_width="@dimen/rankingItemWidth"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abbr_won_games"/>
+
+                <TextView
+                    style="@style/ChatMessage.RankingItem"
+                    android:layout_width="@dimen/rankingItemWidth"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abbr_draw_games"/>
+
+                <TextView
+                    style="@style/ChatMessage.RankingItem"
+                    android:layout_width="@dimen/rankingItemWidth"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abbr_lost_games"/>
+
+            </LinearLayout>
+
+            <include
+                layout="@layout/item_row_ranking"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
 

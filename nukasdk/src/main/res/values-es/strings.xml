@@ -43,4 +43,8 @@
     <string name="weight">Peso</string>
     <string name="contract">Contrato</string>
     <string name="url_error_message">Ha ocurrido un error al intentar abrir el link</string>
+    <string name="abbr_points">Pts.</string>
+    <string name="abbr_won_games">PG</string>
+    <string name="abbr_draw_games">PE</string>
+    <string name="abbr_lost_games">PP</string>
 </resources>

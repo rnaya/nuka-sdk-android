@@ -39,14 +39,14 @@ class MatchesAdapter :
         fun bind(match: Match) {
             itemView.title.text = "${match.homeTeam.name} - ${match.awayTeam.name}"
             itemView.subtitle.text = match.competition
-            ImageLoader.load(getTeamLogoUrl(match.homeTeam.identifier), itemView.homeTeamImage, R.drawable.ic_shield)
+            ImageLoader.load(getTeamShieldUrl(match.homeTeam.identifier), itemView.homeTeamShield, R.drawable.ic_shield)
             itemView.homeTeamShortName.text = match.homeTeam.shortName
             itemView.scheduledDate.text = match.scheduledDate
-            ImageLoader.load(getTeamLogoUrl(match.awayTeam.identifier), itemView.awayTeamImage, R.drawable.ic_shield)
+            ImageLoader.load(getTeamShieldUrl(match.awayTeam.identifier), itemView.awayTeamShield, R.drawable.ic_shield)
             itemView.awayTeamShortName.text = match.awayTeam.shortName
         }
 
-        private fun getTeamLogoUrl(identifier: String): String{
+        private fun getTeamShieldUrl(identifier: String): String{
             return "https://nuka.raisting.co/img/Team/$identifier.png"
         }
     }

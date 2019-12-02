@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/position"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="wrap_content"
+        tools:text="1"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/shield"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="@dimen/rankingItemWidth"
+        android:layout_margin="5dp"
+        tools:src="@drawable/ic_shield"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/teamName"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="textStart"
+        android:padding="5dp"
+        android:textStyle="bold"
+        tools:text="River Plate"/>
+
+    <TextView
+        android:id="@+id/points"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="wrap_content"
+        tools:text="33"/>
+
+    <TextView
+        android:id="@+id/wonGames"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="wrap_content"
+        tools:text="10"/>
+
+    <TextView
+        android:id="@+id/drawGames"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="wrap_content"
+        tools:text="3"/>
+
+    <TextView
+        android:id="@+id/lostGames"
+        style="@style/ChatMessage.RankingItem"
+        android:layout_width="@dimen/rankingItemWidth"
+        android:layout_height="wrap_content"
+        tools:text="2"/>
+
+</LinearLayout>

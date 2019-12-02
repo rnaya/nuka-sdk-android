@@ -17,5 +17,6 @@
     <dimen name="gifChatMessageWidth">220dp</dimen>
     <dimen name="gifChatMessageHeight">200dp</dimen>
     <dimen name="socialNetworkIconSize">50dp</dimen>
+    <dimen name="rankingItemWidth">30dp</dimen>
 
 </resources>

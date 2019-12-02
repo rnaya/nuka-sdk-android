@@ -11,8 +11,8 @@ class ImageLoader {
 
         fun load(imageUrl: String, imageView: ImageView, errorPlaceholder: Int? = R.drawable.image_placeholder) {
             val circularProgressDrawable = CircularProgressDrawable(imageView.context)
-            circularProgressDrawable.strokeWidth = 10f
-            circularProgressDrawable.centerRadius = 25f
+            circularProgressDrawable.strokeWidth = 5f
+            circularProgressDrawable.centerRadius = 15f
             circularProgressDrawable.setColorSchemeColors(R.color.accentBlue)
             circularProgressDrawable.start()
 
