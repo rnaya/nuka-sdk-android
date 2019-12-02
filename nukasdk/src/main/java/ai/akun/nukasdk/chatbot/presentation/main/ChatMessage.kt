@@ -219,6 +219,19 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
                 inflatedView
             )
         }
+    },
+    RECEIVED_ARTICLES("nuka.articles") {
+        override fun getViewType() = 11
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
+            return ReceivedArticlesChatMessageViewHolder(
+                inflatedView
+            )
+        }
     }
 }
 

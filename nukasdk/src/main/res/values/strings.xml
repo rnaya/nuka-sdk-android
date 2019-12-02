@@ -39,4 +39,5 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="contract">Contract</string>
+    <string name="url_error_message">An error has occurred while trying to open this URL</string>
 </resources>

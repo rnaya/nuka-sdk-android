@@ -3,6 +3,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.Card
 import ai.akun.nukasdk.chatbot.presentation.shared.ImageLoader
+import ai.akun.nukasdk.chatbot.presentation.shared.UrlNavigator
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.content.Intent
 import android.net.Uri
@@ -42,9 +43,7 @@ class SocialNetworksAdapter :
             ImageLoader.load(card.imageUri, itemView.socialNetworkIcon)
 
             itemView.open.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(card.buttons?.first()?.postback)
-                startActivity(itemView.context, intent, null)
+                UrlNavigator.navigate(card.buttons?.first()?.postback.toString(), itemView.context)
             }
         }
     }

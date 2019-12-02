@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/productDescription"
-                style="@style/ChatMessage.ProductDescription"
+                style="@style/ChatMessage.ItemSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,7 +48,7 @@
 
             <TextView
                 android:id="@+id/productPrice"
-                style="@style/ChatMessage.ProductPrice"
+                style="@style/ChatMessage.ItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="$39.99" />
@@ -68,7 +68,7 @@
 
     <TextView
         android:id="@+id/category"
-        style="@style/ChatMessage.PlayerPosition"
+        style="@style/ChatMessage.Category"
         android:padding="5dp"
         android:layout_marginTop="15dp"
         android:layout_gravity="end"

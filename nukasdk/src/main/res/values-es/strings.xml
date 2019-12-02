@@ -42,4 +42,5 @@
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
     <string name="contract">Contrato</string>
+    <string name="url_error_message">Ha ocurrido un error al intentar abrir el link</string>
 </resources>

@@ -39,7 +39,7 @@ class MatchesAdapter :
         fun bind(match: Match) {
             itemView.title.text = "${match.homeTeam.name} - ${match.awayTeam.name}"
             itemView.subtitle.text = match.competition
-            ImageLoader.load(getTeamLogoUrl(match.homeTeam.identifier), itemView.homeTeamImage)
+            ImageLoader.load(getTeamLogoUrl(match.homeTeam.identifier), itemView.homeTeamImage, R.drawable.ic_shield)
             itemView.homeTeamShortName.text = match.homeTeam.shortName
             itemView.scheduledDate.text = match.scheduledDate
             ImageLoader.load(getTeamLogoUrl(match.awayTeam.identifier), itemView.awayTeamImage, R.drawable.ic_shield)

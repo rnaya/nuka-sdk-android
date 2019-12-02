@@ -3,6 +3,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.Product
 import ai.akun.nukasdk.chatbot.presentation.shared.ImageLoader
+import ai.akun.nukasdk.chatbot.presentation.shared.UrlNavigator
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -46,9 +47,7 @@ class ProductsAdapter :
             itemView.productPrice.text = "$" + String.format("%.2f",product.price)
 
             itemView.buy.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(product.website)
-                ContextCompat.startActivity(itemView.context, intent, null)
+                UrlNavigator.navigate(product.website, itemView.context)
             }
         }
 
