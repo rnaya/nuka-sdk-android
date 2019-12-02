@@ -232,6 +232,19 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
                 inflatedView
             )
         }
+    },
+    RECEIVED_RANKING("nuka.ranking") {
+        override fun getViewType() = 12
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView = parent.inflate(R.layout.item_row_received_ranking_chat_message, false)
+            return ReceivedRankingChatMessageViewHolder(
+                inflatedView
+            )
+        }
     }
 }
 
