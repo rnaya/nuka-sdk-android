@@ -7,7 +7,7 @@ import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ChatMessagesAdapter(private val onSendNewMessage: ((String) -> Unit)?) : RecyclerView.Adapter<ChatMessageViewHolder>() {
+class ChatMessagesAdapter(private val onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) : RecyclerView.Adapter<ChatMessageViewHolder>() {
 
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
 

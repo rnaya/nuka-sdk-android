@@ -9,7 +9,7 @@
 
     <!--Messages-->
     <dimen name="textMessageSize">18sp</dimen>
-    <dimen name="minMessageCardWidth">80dp</dimen>
+    <dimen name="minMessageCardWidth">40dp</dimen>
     <dimen name="minMessageCardHeight">40dp</dimen>
     <dimen name="messageCardElevation">4dp</dimen>
     <dimen name="messageCardMargin">5dp</dimen>

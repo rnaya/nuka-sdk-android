@@ -2,6 +2,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import android.os.Build
@@ -22,7 +23,7 @@ class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(ite
         }
     }
 
-    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
+    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) {
         mediaPlayer = MediaPlayer()
         mediaPlayer.setDataSource(chatMessage.audioFilePath)
         mediaPlayer.prepare()

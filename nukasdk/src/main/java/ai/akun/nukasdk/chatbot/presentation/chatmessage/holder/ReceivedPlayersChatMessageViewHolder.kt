@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_row_received_text_chat_message.view.*
 
 class ReceivedPlayersChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
-    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
+    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) {
         if(!chatMessage.text.isNullOrBlank() && chatMessage.text != ChatMessageIntent.RECEIVED_PLAYERS.displayName) {
             itemView.scrollableList.visibility = View.GONE
             itemView.messageContainer.visibility = View.VISIBLE

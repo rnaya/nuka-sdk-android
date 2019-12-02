@@ -39,7 +39,7 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
                 this.chatMessagesLiveData.value = this.chatMessages
 
                 if (this.chatMessages.count() == 0) {
-                    addWelcomeChatMessage()
+                    addLocallyReceivedChatMessage(context.getString(R.string.chatbot_welcome_message), ChatMessageIntent.RECEIVED_WELCOME)
                 }
             }, { error ->
                 Timber.e(error, "Error while getting chat messages")
@@ -47,12 +47,12 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
             .also { disposables.add(it) }
     }
 
-    private fun addWelcomeChatMessage() {
-        val welcomeChatMessage = ChatMessage(
-            text = context.getString(R.string.chatbot_welcome_message),
-            intent = ChatMessageIntent.RECEIVED_WELCOME
+    fun addLocallyReceivedChatMessage(text: String, chatMessageIntent: ChatMessageIntent) {
+        val chatMessage = ChatMessage(
+            text = text,
+            intent = chatMessageIntent
         )
-        saveChatMessage(welcomeChatMessage)
+        saveChatMessage(chatMessage)
     }
 
     fun sendTextChatMessage(text: String) {

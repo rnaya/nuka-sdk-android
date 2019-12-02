@@ -2,6 +2,7 @@ package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.SocialNetworksAdapter
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
+import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.item_row_scrollable_chat_message.view.*
@@ -9,7 +10,7 @@ import kotlinx.android.synthetic.main.item_row_received_text_chat_message.view.*
 
 class ReceivedSocialNetworksChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
-    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String) -> Unit)?) {
+    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) {
         if(!chatMessage.text.isNullOrBlank()) {
             itemView.scrollableList.visibility = View.GONE
             itemView.messageContainer.visibility = View.VISIBLE

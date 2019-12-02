@@ -1,5 +1,6 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
+import ai.akun.nukasdk.BuildConfig
 import ai.akun.nukasdk.ConnectivityReceiver
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
@@ -12,6 +13,8 @@ import android.media.MediaRecorder
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -61,6 +64,25 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         getMessages()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return if(BuildConfig.DEBUG) {
+            menuInflater.inflate(R.menu.main_menu, menu)
+            true
+        } else {
+            super.onCreateOptionsMenu(menu)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_live_match -> {
+                chatBotViewModel.addLocallyReceivedChatMessage(getString(R.string.liveticker_updates), ChatMessageIntent.RECEIVED_LIVE_MATCH_AVAILABLE)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun setUpConnectivityChecks() {
         registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
@@ -107,7 +129,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         layoutManager.stackFromEnd = true
         chatMessages.layoutManager = layoutManager
 
-        chatMessagesAdapter = ChatMessagesAdapter(::sendTextMessage)
+        chatMessagesAdapter = ChatMessagesAdapter(::addTextMessage)
         chatMessages.adapter = chatMessagesAdapter
 
         chatBotViewModel.onChatMessagesUpdated().observe(this, Observer {
@@ -126,14 +148,14 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         messageContent.setOnEditorActionListener { _, actionId, _ ->
             var action = false
             if (actionId == EditorInfo.IME_ACTION_SEND) {
-                sendTextMessage(messageContent.text.toString())
+                addTextMessage(messageContent.text.toString(), ChatMessageIntent.SENT_TEXT)
                 action = true
             }
 
             action
         }
         sendTextMessage.setOnClickListener {
-            sendTextMessage(messageContent.text.toString())
+            addTextMessage(messageContent.text.toString(), ChatMessageIntent.SENT_TEXT)
         }
         sendAudioMessage.setOnTouchListener { _, motionEvent ->
             if(motionEvent.action == MotionEvent.ACTION_DOWN)
@@ -166,8 +188,11 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         sendTextMessage.isEnabled = true
     }
 
-    private fun sendTextMessage(text: String) {
-        chatBotViewModel.sendTextChatMessage(text)
+    private fun addTextMessage(text: String, chatMessageIntent: ChatMessageIntent) {
+        if(chatMessageIntent == ChatMessageIntent.SENT_TEXT)
+            chatBotViewModel.sendTextChatMessage(text)
+        else
+            chatBotViewModel.addLocallyReceivedChatMessage(text, chatMessageIntent)
     }
 
     private fun startRecordingAudioMessage() {
