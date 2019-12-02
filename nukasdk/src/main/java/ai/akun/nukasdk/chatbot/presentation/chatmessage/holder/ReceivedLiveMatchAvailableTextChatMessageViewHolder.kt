@@ -19,15 +19,15 @@ class ReceivedLiveMatchAvailableTextChatMessageViewHolder(itemView: View) : Chat
             addNewActionChatMessage("Ok", ChatMessageIntent.RECEIVED_TEXT)
 
             Handler().postDelayed({
-                addNewActionChatMessage("Sebastian Mendez", ChatMessageIntent.RECEIVED_TEXT)
+                addNewActionChatMessage("Sebastian Mendez", ChatMessageIntent.RECEIVED_LIVE_MATCH_UPDATE)
             }, 2000)
 
             Handler().postDelayed({
-                addNewActionChatMessage("Jaime Valdes", ChatMessageIntent.RECEIVED_TEXT)
+                addNewActionChatMessage("Jaime Valdes", ChatMessageIntent.RECEIVED_LIVE_MATCH_UPDATE)
             }, 4000)
 
             Handler().postDelayed({
-                addNewActionChatMessage("Entra: Sergio Bareiro \n Sale: Javier Urzua", ChatMessageIntent.RECEIVED_TEXT)
+                addNewActionChatMessage("Entra: Sergio Bareiro \n Sale: Javier Urzua", ChatMessageIntent.RECEIVED_LIVE_MATCH_UPDATE)
             }, 6000)
         }
 

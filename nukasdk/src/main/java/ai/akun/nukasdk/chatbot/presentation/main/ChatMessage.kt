@@ -257,6 +257,18 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
                 parent.inflate(R.layout.item_row_received_live_match_available_text_chat_message, false)
             return ReceivedLiveMatchAvailableTextChatMessageViewHolder(inflatedView)
         }
+    },
+    RECEIVED_LIVE_MATCH_UPDATE("nuka.match.update") {
+        override fun getViewType() = 14
+
+        override fun getViewHolder(
+            parent: ViewGroup,
+            onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?
+        ): ChatMessageViewHolder {
+            val inflatedView =
+                parent.inflate(R.layout.item_row_match_update, false)
+            return ReceivedMatchUpdateChatMessageViewHolder(inflatedView)
+        }
     }
 }
 
