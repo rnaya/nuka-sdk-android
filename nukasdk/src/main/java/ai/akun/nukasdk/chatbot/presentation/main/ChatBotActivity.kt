@@ -15,7 +15,6 @@ import android.os.Handler
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.doAfterTextChanged
@@ -37,6 +36,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
     private val noConnectionMessageHandler = Handler()
     private val noConnectionMessageRunnable = Runnable {
         noConnectivityMessage.visibility = View.VISIBLE
+        botStatus.text = getString(R.string.offline)
     }
 
     @Inject
@@ -218,6 +218,10 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         if (!isConnected) {
             noConnectionMessageHandler.postDelayed(noConnectionMessageRunnable,5000)
         } else {
+            if(noConnectivityMessage.visibility == View.VISIBLE) {
+                botStatus.text = getString(R.string.online)
+            }
+
             noConnectionMessageHandler.removeCallbacks(noConnectionMessageRunnable)
             noConnectivityMessage.visibility = View.GONE
         }
