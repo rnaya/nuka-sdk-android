@@ -3,6 +3,7 @@ package ai.akun.nukasdk.chatbot.presentation.main
 import ai.akun.nukasdk.BuildConfig
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
+import ai.akun.nukasdk.chatbot.data.webhook.WebhookService
 import android.content.Context
 import android.os.Handler
 import androidx.core.os.ConfigurationCompat
@@ -16,7 +17,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ChatBotViewModel @Inject constructor(private val context: Context,
-                                           private val chatMessageRepository: ChatMessageRepository) : ViewModel() {
+                                           private val chatMessageRepository: ChatMessageRepository,
+                                           private val webhookService: WebhookService) : ViewModel() {
 
     //TODO get values
     private val sessionId = 1
@@ -128,5 +130,9 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
 
     private fun getCurrentLocale(): String {
         return if (BuildConfig.DEBUG) "es" else ConfigurationCompat.getLocales(context.resources.configuration)[0].language
+    }
+
+    fun sendLiveMatchUpdatesRequest(matchId: String) {
+
     }
 }

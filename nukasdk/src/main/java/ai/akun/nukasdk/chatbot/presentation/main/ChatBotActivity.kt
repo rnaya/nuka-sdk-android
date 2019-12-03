@@ -6,6 +6,8 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.AddLocallyReceivedMessageEvent
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.GetLiveMatchUpdatesEvent
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendAutomaticTextChatMessageEvent
 import ai.akun.nukasdk.chatbot.presentation.shared.ConnectivityVerifier
 import android.Manifest
@@ -270,5 +272,17 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
     fun onSendAutomaticMessageEvent(event: SendAutomaticTextChatMessageEvent) {
         hideKeyboard()
         sendTextMessage(event.text)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onAddLocallyReceivedMessageEvent(event: AddLocallyReceivedMessageEvent) {
+        hideKeyboard()
+        chatBotViewModel.addLocallyReceivedChatMessage(event.text, event.intent)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onGetMatchLiveUpdatesEvent(event: GetLiveMatchUpdatesEvent) {
+        hideKeyboard()
+        chatBotViewModel.sendLiveMatchUpdatesRequest(event.matchId)
     }
 }
