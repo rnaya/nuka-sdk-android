@@ -11,7 +11,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.item_row_sent_audio_chat_message.view.*
 import java.util.concurrent.TimeUnit
 
-class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
+class AudioViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     private lateinit var mediaPlayer: MediaPlayer
 

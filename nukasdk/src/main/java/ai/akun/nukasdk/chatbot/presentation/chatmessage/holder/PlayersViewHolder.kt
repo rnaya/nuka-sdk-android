@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.item_row_scrollable_chat_message.view.*
 import kotlinx.android.synthetic.main.item_row_received_text_chat_message.view.*
 
-class ReceivedPlayersChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
+class PlayersViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage) {
         if(!chatMessage.text.isNullOrBlank() && chatMessage.text != ChatMessageIntent.RECEIVED_PLAYERS.displayName) {

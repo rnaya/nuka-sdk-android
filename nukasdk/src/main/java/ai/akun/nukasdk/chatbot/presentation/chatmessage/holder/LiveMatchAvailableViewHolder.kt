@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_row_received_live_match_available_tex
 import kotlinx.android.synthetic.main.item_row_sent_text_chat_message.view.content
 import org.greenrobot.eventbus.EventBus
 
-class ReceivedLiveMatchAvailableTextChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
+class LiveMatchAvailableViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage) {
         itemView.content.text = chatMessage.text

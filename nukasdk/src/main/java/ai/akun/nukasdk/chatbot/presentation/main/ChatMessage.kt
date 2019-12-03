@@ -2,7 +2,7 @@ package ai.akun.nukasdk.chatbot.presentation.main
 
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.*
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.ReceivedSocialNetworksChatMessageViewHolder
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.holder.SocialNetworksViewHolder
 import ai.akun.nukasdk.chatbot.presentation.shared.inflate
 import android.view.ViewGroup
 
@@ -104,7 +104,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_sent_text_chat_message, false)
-            return SentTextChatMessageViewHolder(inflatedView)
+            return SentTextViewHolder(inflatedView)
         }
     },
     SENT_AUDIO("nuka.sent.audio") {
@@ -112,7 +112,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_sent_audio_chat_message, false)
-            return SentAudioChatMessageViewHolder(inflatedView)
+            return AudioViewHolder(inflatedView)
         }
     },
     RECEIVED_WELCOME("nuka.welcome") {
@@ -121,7 +121,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView =
                 parent.inflate(R.layout.item_row_received_welcome_text_chat_message, false)
-            return ReceivedWelcomeTextChatMessageViewHolder(inflatedView)
+            return WelcomeViewHolder(inflatedView)
         }
     },
     RECEIVED_TEXT("nuka.text") {
@@ -129,7 +129,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_text_chat_message, false)
-            return ReceivedTextChatMessageViewHolder(inflatedView)
+            return ReceivedTextViewHolder(inflatedView)
         }
     },
     RECEIVED_GIF("nuka.botactions.giphy") {
@@ -137,7 +137,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_gif_chat_message, false)
-            return ReceivedGifChatMessageViewHolder(inflatedView)
+            return GifViewHolder(inflatedView)
         }
     },
     RECEIVED_SOCIAL_NETWORKS("nuka.player.socialnetworks") {
@@ -145,7 +145,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedSocialNetworksChatMessageViewHolder(
+            return SocialNetworksViewHolder(
                 inflatedView
             )
         }
@@ -155,7 +155,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedSocialNetworksChatMessageViewHolder(
+            return SocialNetworksViewHolder(
                 inflatedView
             )
         }
@@ -165,7 +165,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedMatchesChatMessageViewHolder(
+            return NextMatchesViewHolder(
                 inflatedView
             )
         }
@@ -175,7 +175,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedPlayersChatMessageViewHolder(
+            return PlayersViewHolder(
                 inflatedView
             )
         }
@@ -185,7 +185,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedProductsChatMessageViewHolder(
+            return ProductsViewHolder(
                 inflatedView
             )
         }
@@ -195,7 +195,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_scrollable_chat_message, false)
-            return ReceivedArticlesChatMessageViewHolder(
+            return ArticlesViewHolder(
                 inflatedView
             )
         }
@@ -205,7 +205,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
 
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView = parent.inflate(R.layout.item_row_received_ranking_chat_message, false)
-            return ReceivedRankingChatMessageViewHolder(
+            return RankingViewHolder(
                 inflatedView
             )
         }
@@ -216,7 +216,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView =
                 parent.inflate(R.layout.item_row_received_live_match_available_text_chat_message, false)
-            return ReceivedLiveMatchAvailableTextChatMessageViewHolder(inflatedView)
+            return LiveMatchAvailableViewHolder(inflatedView)
         }
     },
     RECEIVED_LIVE_MATCH_UPDATE("nuka.match.update") {
@@ -225,7 +225,7 @@ enum class ChatMessageIntent(val displayName: String) : ViewHolderSource {
         override fun getViewHolder(parent: ViewGroup): ChatMessageViewHolder {
             val inflatedView =
                 parent.inflate(R.layout.item_row_match_update, false)
-            return ReceivedMatchUpdateChatMessageViewHolder(inflatedView)
+            return LiveMatchUpdateViewHolder(inflatedView)
         }
     }
 }

@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.item_row_sent_text_chat_message.view.conte
 import kotlinx.android.synthetic.main.item_row_received_welcome_text_chat_message.view.*
 import org.greenrobot.eventbus.EventBus
 
-class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
+class WelcomeViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage) {
         itemView.content.text = chatMessage.text

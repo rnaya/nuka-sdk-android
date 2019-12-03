@@ -11,7 +11,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.item_row_ranking.view.*
 import kotlinx.android.synthetic.main.item_row_received_ranking_chat_message.view.*
 
-class ReceivedRankingChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
+class RankingViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     @SuppressLint("InflateParams")
     override fun bind(chatMessage: ChatMessage) {
