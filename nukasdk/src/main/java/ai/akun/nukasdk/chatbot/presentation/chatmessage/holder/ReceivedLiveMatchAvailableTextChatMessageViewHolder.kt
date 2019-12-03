@@ -9,10 +9,7 @@ import kotlinx.android.synthetic.main.item_row_sent_text_chat_message.view.conte
 
 class ReceivedLiveMatchAvailableTextChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
-    private lateinit var onSendNewMessage: ((String, ChatMessageIntent) -> Unit)
-
-    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) {
-        this.onSendNewMessage = onSendNewMessage!!
+    override fun bind(chatMessage: ChatMessage) {
         itemView.content.text = chatMessage.text
 
         itemView.yesAction.setOnClickListener {
@@ -37,7 +34,7 @@ class ReceivedLiveMatchAvailableTextChatMessageViewHolder(itemView: View) : Chat
     }
 
     private fun addNewActionChatMessage(actionText: String, chatMessageIntent: ChatMessageIntent) {
-        onSendNewMessage.invoke(actionText, chatMessageIntent)
+//        onSendNewMessage.invoke(actionText, chatMessageIntent)
     }
 
 }

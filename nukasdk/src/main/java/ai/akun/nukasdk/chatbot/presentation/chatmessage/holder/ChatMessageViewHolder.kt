@@ -6,6 +6,5 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class ChatMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    abstract fun bind(chatMessage: ChatMessage,
-                      onSendNewMessage: ((String, ChatMessageIntent) -> Unit)? = null)
+    abstract fun bind(chatMessage: ChatMessage)
 }

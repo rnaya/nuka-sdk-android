@@ -7,14 +7,14 @@ import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ChatMessagesAdapter(private val onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) : RecyclerView.Adapter<ChatMessageViewHolder>() {
+class ChatMessagesAdapter : RecyclerView.Adapter<ChatMessageViewHolder>() {
 
     private var chatMessages: MutableList<ChatMessage> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatMessageViewHolder {
         val chatMessageType = ChatMessageIntent.values().find { it.getViewType() == viewType }
-        return chatMessageType?.getViewHolder(parent, ::onSendNewMessage.invoke())
-            ?: ChatMessageIntent.RECEIVED_TEXT.getViewHolder(parent, ::onSendNewMessage.invoke())
+        return chatMessageType?.getViewHolder(parent)
+            ?: ChatMessageIntent.RECEIVED_TEXT.getViewHolder(parent)
     }
 
     override fun getItemViewType(position: Int) = chatMessages[position].intent.getViewType()
@@ -22,7 +22,7 @@ class ChatMessagesAdapter(private val onSendNewMessage: ((String, ChatMessageInt
     override fun getItemCount(): Int = chatMessages.size
 
     override fun onBindViewHolder(viewHolder: ChatMessageViewHolder, position: Int) {
-        viewHolder.bind(chatMessages[position], onSendNewMessage)
+        viewHolder.bind(chatMessages[position])
     }
 
     fun loadMessages(messages: List<ChatMessage>) {

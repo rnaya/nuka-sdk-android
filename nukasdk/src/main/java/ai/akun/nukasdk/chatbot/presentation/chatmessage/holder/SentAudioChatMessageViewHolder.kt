@@ -23,7 +23,7 @@ class SentAudioChatMessageViewHolder(itemView: View) : ChatMessageViewHolder(ite
         }
     }
 
-    override fun bind(chatMessage: ChatMessage, onSendNewMessage: ((String, ChatMessageIntent) -> Unit)?) {
+    override fun bind(chatMessage: ChatMessage) {
         mediaPlayer = MediaPlayer()
         mediaPlayer.setDataSource(chatMessage.audioFilePath)
         mediaPlayer.prepare()
