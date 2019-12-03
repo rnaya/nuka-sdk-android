@@ -1,12 +1,13 @@
 package ai.akun.nukasdk.chatbot.presentation.main
 
 import ai.akun.nukasdk.BuildConfig
-import ai.akun.nukasdk.ConnectivityReceiver
+import ai.akun.nukasdk.chatbot.presentation.shared.ConnectivityReceiver
 import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendTextChatMessageEvent
+import ai.akun.nukasdk.chatbot.presentation.shared.ConnectivityVerifier
 import android.Manifest
 import android.content.IntentFilter
 import android.content.pm.PackageManager
@@ -88,6 +89,9 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
     }
 
     private fun setUpConnectivityChecks() {
+        if(!ConnectivityVerifier.isConnectedOrConnecting(this)) {
+            updateNetworkMessage(false, 1000)
+        }
         registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
@@ -239,12 +243,12 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
-        updateNetworkMessage(isConnected)
+        updateNetworkMessage(isConnected, 5000)
     }
 
-    private fun updateNetworkMessage(isConnected: Boolean) {
+    private fun updateNetworkMessage(isConnected: Boolean, delayMillis: Long) {
         if (!isConnected) {
-            noConnectionMessageHandler.postDelayed(noConnectionMessageRunnable,5000)
+            noConnectionMessageHandler.postDelayed(noConnectionMessageRunnable,delayMillis)
         } else {
             if(noConnectivityMessage.visibility == View.VISIBLE) {
                 botStatus.text = getString(R.string.online)
