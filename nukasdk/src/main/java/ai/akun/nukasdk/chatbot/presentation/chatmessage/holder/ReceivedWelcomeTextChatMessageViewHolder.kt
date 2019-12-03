@@ -1,7 +1,7 @@
 package ai.akun.nukasdk.chatbot.presentation.chatmessage.holder
 
 import ai.akun.nukasdk.R
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendTextChatMessageEvent
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendAutomaticTextChatMessageEvent
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import android.view.View
 import kotlinx.android.synthetic.main.item_row_sent_text_chat_message.view.content
@@ -30,7 +30,7 @@ class ReceivedWelcomeTextChatMessageViewHolder(itemView: View) : ChatMessageView
     }
 
     private fun addNewActionChatMessage(actionText: String) {
-        EventBus.getDefault().post(SendTextChatMessageEvent(actionText))
+        EventBus.getDefault().post(SendAutomaticTextChatMessageEvent(actionText))
     }
 
 }

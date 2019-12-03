@@ -6,7 +6,7 @@ import ai.akun.nukasdk.R
 import ai.akun.nukasdk.chatbot.di.component.DaggerActivityComponent
 import ai.akun.nukasdk.chatbot.di.module.ActivityModule
 import ai.akun.nukasdk.chatbot.presentation.chatmessage.adapter.ChatMessagesAdapter
-import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendTextChatMessageEvent
+import ai.akun.nukasdk.chatbot.presentation.chatmessage.events.SendAutomaticTextChatMessageEvent
 import ai.akun.nukasdk.chatbot.presentation.shared.ConnectivityVerifier
 import android.Manifest
 import android.content.IntentFilter
@@ -20,6 +20,7 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.doAfterTextChanged
@@ -158,14 +159,14 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         messageContent.setOnEditorActionListener { _, actionId, _ ->
             var action = false
             if (actionId == EditorInfo.IME_ACTION_SEND) {
-                addTextMessage(messageContent.text.toString())
+                sendTextMessage(messageContent.text.toString())
                 action = true
             }
 
             action
         }
         sendTextMessage.setOnClickListener {
-            addTextMessage(messageContent.text.toString())
+            sendTextMessage(messageContent.text.toString())
         }
         sendAudioMessage.setOnTouchListener { _, motionEvent ->
             if(motionEvent.action == MotionEvent.ACTION_DOWN)
@@ -198,7 +199,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         sendTextMessage.isEnabled = true
     }
 
-    private fun addTextMessage(text: String) {
+    private fun sendTextMessage(text: String) {
         chatBotViewModel.sendTextChatMessage(text)
     }
 
@@ -259,8 +260,15 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         }
     }
 
+    private fun hideKeyboard() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        val view = currentFocus ?: View(this)
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onSendMessageEvent(event: SendTextChatMessageEvent) {
-        addTextMessage(event.text)
+    fun onSendAutomaticMessageEvent(event: SendAutomaticTextChatMessageEvent) {
+        hideKeyboard()
+        sendTextMessage(event.text)
     }
 }
