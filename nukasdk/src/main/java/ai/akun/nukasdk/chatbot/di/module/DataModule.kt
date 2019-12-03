@@ -6,6 +6,7 @@ import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageDao
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageMapper
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageService
+import ai.akun.nukasdk.chatbot.data.webhook.WebhookService
 import android.annotation.SuppressLint
 import android.content.Context
 import dagger.Module
@@ -48,12 +49,28 @@ class DataModule {
 
     @Provides
     fun provideChatMessageService(): ChatMessageService {
-        val retrofit = getRetrofitInstance()
+        val retrofit = getRetrofitInstance(
+            getAuthenticationInterceptor(
+                BuildConfig.CHAT_MESSAGE_API_AUTH_USERNAME,
+                BuildConfig.CHAT_MESSAGE_API_PASSWORD
+            )
+        )
         return retrofit.create(ChatMessageService::class.java)
     }
 
-    private fun getRetrofitInstance(): Retrofit {
-        val okHttpClient = getOkHttpClient()
+    @Provides
+    fun provideWebhookService(): WebhookService {
+        val retrofit = getRetrofitInstance(
+            getAuthenticationInterceptor(
+                BuildConfig.WEBHOOK_API_AUTH_USERNAME,
+                BuildConfig.WEBHOOK_API_PASSWORD
+            )
+        )
+        return retrofit.create(WebhookService::class.java)
+    }
+
+    private fun getRetrofitInstance(authenticationInterceptor: Interceptor): Retrofit {
+        val okHttpClient = getOkHttpClient(authenticationInterceptor)
         return Retrofit.Builder()
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -62,13 +79,13 @@ class DataModule {
             .build()
     }
 
-    private fun getOkHttpClient() : OkHttpClient {
+    private fun getOkHttpClient(authenticationInterceptor: Interceptor) : OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
 
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
 
-        okHttpClientBuilder.addInterceptor(getAuthenticationInterceptor())
+        okHttpClientBuilder.addInterceptor(authenticationInterceptor)
 
         if (BuildConfig.DEBUG)  {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -103,10 +120,10 @@ class DataModule {
         okHttpClientBuilder.hostnameVerifier(HostnameVerifier { _, _ -> true })
     }
 
-    private fun getAuthenticationInterceptor() : Interceptor {
+    private fun getAuthenticationInterceptor(userName: String, password: String) : Interceptor {
         return object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
-                val credentials = "${BuildConfig.AUTH_USERNAME}:${BuildConfig.AUTH_PASSWORD}"
+                val credentials = "$userName:$password"
                 val basic = "Basic " + Base64.encodeToString(credentials.toByteArray(), NO_WRAP)
 
                 val originalRequest = chain.request()
