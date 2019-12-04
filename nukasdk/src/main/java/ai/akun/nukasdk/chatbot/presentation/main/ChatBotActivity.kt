@@ -96,6 +96,8 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
             updateNetworkMessage(false, 1000)
         }
         registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        noConnectivityMessage.setOnTouchListener { _, _ -> true } //disable touch
+
     }
 
     override fun onStart() {
