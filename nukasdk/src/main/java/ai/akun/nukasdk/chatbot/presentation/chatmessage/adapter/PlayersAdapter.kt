@@ -42,7 +42,7 @@ class PlayersAdapter :
         @SuppressLint("SetTextI18n")
         fun bind(player: Player) {
             itemView.position.text = player.position
-            ImageLoader.load(getPlayerImageUrl(player.identifier), itemView.playerImage, R.drawable.player_placeholder)
+            ImageLoader.load(getPlayerImageUrl(player.identifier), itemView.playerImage, R.drawable.ic_player)
             itemView.playerName.text = player.name
             itemView.playerAge.text = getAgeFromBirthDate(player.birthDate) ?: "-"
             itemView.playerHeight.text = "-"
