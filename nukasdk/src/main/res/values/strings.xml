@@ -45,4 +45,5 @@
     <string name="abbr_draw_games">D</string>
     <string name="abbr_lost_games">L</string>
     <string name="substitution_description">In: %1$s \nOut: %2$s</string>
+    <string name="error_message">An error has occurred</string>
 </resources>

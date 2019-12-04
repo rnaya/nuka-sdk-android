@@ -48,4 +48,5 @@
     <string name="abbr_draw_games">PE</string>
     <string name="abbr_lost_games">PP</string>
     <string name="substitution_description">Entra: %1$s \nSale: %2$s</string>
+    <string name="error_message">Ha ocurrido un error</string>
 </resources>
