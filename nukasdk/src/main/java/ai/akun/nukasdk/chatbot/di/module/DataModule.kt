@@ -38,8 +38,9 @@ class DataModule {
     @Provides
     fun provideChatMessageRepository(chatMessageDao: ChatMessageDao,
                                      chatMessageMapper: ChatMessageMapper,
-                                     chatMessageService: ChatMessageService): ChatMessageRepository {
-        return ChatMessageRepository(chatMessageDao, chatMessageMapper, chatMessageService)
+                                     chatMessageService: ChatMessageService,
+                                     webhookService: WebhookService): ChatMessageRepository {
+        return ChatMessageRepository(chatMessageDao, chatMessageMapper, chatMessageService, webhookService)
     }
 
     @Provides

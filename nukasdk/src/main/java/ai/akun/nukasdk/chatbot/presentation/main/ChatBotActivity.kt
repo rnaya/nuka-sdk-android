@@ -280,7 +280,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         chatBotViewModel.addLocallyReceivedChatMessage(event.text, event.intent)
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
     fun onGetMatchLiveUpdatesEvent(event: GetLiveMatchUpdatesEvent) {
         hideKeyboard()
         chatBotViewModel.sendLiveMatchUpdatesRequest(event.matchId)

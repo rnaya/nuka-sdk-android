@@ -7,7 +7,17 @@ import kotlinx.android.synthetic.main.item_row_match_update.view.*
 class LiveMatchUpdateViewHolder(itemView: View) : ChatMessageViewHolder(itemView) {
 
     override fun bind(chatMessage: ChatMessage) {
-        itemView.content.text = chatMessage.text
+        when {
+            chatMessage.liveMatchUpdate?.bookings != null -> {
+                itemView.content.text = "Received booking"
+            }
+            chatMessage.liveMatchUpdate?.scorers != null -> {
+                itemView.content.text = "Received score"
+            }
+            chatMessage.liveMatchUpdate?.substitutions != null -> {
+                itemView.content.text = "Received substitution"
+            }
+        }
     }
 
 }

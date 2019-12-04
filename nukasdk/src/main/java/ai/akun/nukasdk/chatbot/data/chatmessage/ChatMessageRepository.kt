@@ -1,5 +1,6 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
+import ai.akun.nukasdk.chatbot.data.webhook.WebhookService
 import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -12,7 +13,9 @@ import javax.inject.Inject
 
 class ChatMessageRepository @Inject constructor(private val chatMessageDao: ChatMessageDao,
                                                 private val chatMessageMapper: ChatMessageMapper,
-                                                private val chatMessageService: ChatMessageService) {
+                                                private val chatMessageService: ChatMessageService,
+                                                private val webhookService: WebhookService
+) {
 
     fun getAllMessages() : Single<List<ChatMessage>> {
         return chatMessageDao.getAll().map { dbEntities -> dbEntities.map { chatMessageMapper.fromDb(it) } }
@@ -55,5 +58,21 @@ class ChatMessageRepository @Inject constructor(private val chatMessageDao: Chat
         return chatMessageService
             .sendAudioChatMessage(sessionIdPart, teamIdPart, localePart, filePart)
             .map { chatMessageMapper.fromResponse(it) }
+    }
+
+    fun sendLiveMatchUpdatesRequest(
+        localeCode: String,
+        sessionId: Int,
+        teamId: Int,
+        matchId: String): Single<ChatMessage> {
+
+        val sessionIdPart = sessionId.toString().toRequestBody(MultipartBody.FORM)
+        val teamIdPart = teamId.toString().toRequestBody(MultipartBody.FORM)
+        val localePart = localeCode.toRequestBody(MultipartBody.FORM)
+        val matchIdPart = matchId.toRequestBody(MultipartBody.FORM)
+
+        return webhookService
+            .getLiveMatchUpdates(sessionIdPart, teamIdPart, localePart, matchIdPart)
+            .map { chatMessageMapper.fromLiveMatchUpdate(it) }
     }
 }

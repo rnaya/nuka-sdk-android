@@ -20,17 +20,17 @@ interface WebhookService {
 }
 
 data class LiveMatchUpdateResponse(
-    val bookings: List<BookingResponse>,
+    val bookings: List<BookingResponse>?,
     @SerializedName("scorer_away")
-    val awayScore: Int,
+    val awayScore: Int?,
     @SerializedName("scorer_home")
-    val homeScore: Int,
-    val scorers: List<ScorerResponse>,
-    val substitutions: List<SubstitutionResponse>,
+    val homeScore: Int?,
+    val scorers: List<ScorerResponse>?,
+    val substitutions: List<SubstitutionResponse>?,
     @SerializedName("team_away")
-    val awayTeam: String,
+    val awayTeam: String?,
     @SerializedName("team_home")
-    val homeTeam: String
+    val homeTeam: String?
 )
 
 data class BookingResponse(

@@ -11,7 +11,8 @@ data class ChatMessage(
     val audioFilePath: String? = null,
     val intent: ChatMessageIntent,
     val cardsPayload: List<Card>? = null,
-    val webhookPayload: WebhookPayload? = null
+    val webhookPayload: WebhookPayload? = null,
+    val liveMatchUpdate: LiveMatchUpdate? = null
     )
 
 

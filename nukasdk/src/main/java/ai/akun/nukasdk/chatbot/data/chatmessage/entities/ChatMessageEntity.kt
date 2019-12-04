@@ -13,5 +13,7 @@ data class ChatMessageEntity(
     val intent: String,
     val cardPayload: List<CardEntity>?,
     @Embedded
-    val webhookPayload: WebhookPayloadEntity?
+    val webhookPayload: WebhookPayloadEntity?,
+    @Embedded
+    val liveMatchUpdateEntity: LiveMatchUpdateEntity?
 )

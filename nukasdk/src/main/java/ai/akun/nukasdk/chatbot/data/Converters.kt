@@ -72,4 +72,37 @@ class Converters {
     fun toRankingsJson(list: List<RankingEntity?>?): String? {
         return Gson().toJson(list)
     }
+
+    @TypeConverter
+    fun toBookings(value: String?): List<BookingEntity?>? {
+        val listType = object : TypeToken<List<BookingEntity?>?>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun toBookingsJson(list: List<BookingEntity?>?): String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun toScorers(value: String?): List<ScorerEntity?>? {
+        val listType = object : TypeToken<List<ScorerEntity?>?>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun toScorersJson(list: List<ScorerEntity?>?): String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun toSubstitutions(value: String?): List<SubstitutionEntity?>? {
+        val listType = object : TypeToken<List<SubstitutionEntity?>?>() {}.type
+        return Gson().fromJson(value, listType)
+    }
+
+    @TypeConverter
+    fun toSubstitutionsJson(list: List<SubstitutionEntity?>?): String? {
+        return Gson().toJson(list)
+    }
 }

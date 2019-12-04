@@ -1,18 +1,8 @@
 package ai.akun.nukasdk.chatbot.data.chatmessage
 
 import ai.akun.nukasdk.chatbot.data.chatmessage.entities.*
-import ai.akun.nukasdk.chatbot.presentation.main.Article
-import ai.akun.nukasdk.chatbot.presentation.main.Button
-import ai.akun.nukasdk.chatbot.presentation.main.Card
-import ai.akun.nukasdk.chatbot.presentation.main.ChatMessage
-import ai.akun.nukasdk.chatbot.presentation.main.ChatMessageIntent
-import ai.akun.nukasdk.chatbot.presentation.main.Match
-import ai.akun.nukasdk.chatbot.presentation.main.Player
-import ai.akun.nukasdk.chatbot.presentation.main.Product
-import ai.akun.nukasdk.chatbot.presentation.main.Ranking
-import ai.akun.nukasdk.chatbot.presentation.main.Team
-import ai.akun.nukasdk.chatbot.presentation.main.Venue
-import ai.akun.nukasdk.chatbot.presentation.main.WebhookPayload
+import ai.akun.nukasdk.chatbot.data.webhook.LiveMatchUpdateResponse
+import ai.akun.nukasdk.chatbot.presentation.main.*
 
 class ChatMessageMapper {
 
@@ -89,6 +79,39 @@ class ChatMessageMapper {
                         it.won
                     )
                 }
+            ),
+            liveMatchUpdateEntity = LiveMatchUpdateEntity(
+                from.liveMatchUpdate?.bookings?.map {
+                    BookingEntity(
+                        it.minute,
+                        it.player,
+                        it.team,
+                        it.teamId,
+                        it.type
+                    )
+                },
+                from.liveMatchUpdate?.awayScore,
+                from.liveMatchUpdate?.homeScore,
+                from.liveMatchUpdate?.scorers?.map {
+                    ScorerEntity(
+                        it.minute,
+                        it.player,
+                        it.team,
+                        it.teamId
+                    )
+                },
+                from.liveMatchUpdate?.substitutions?.map {
+                    SubstitutionEntity(
+                        it.minute,
+                        it.playerOff,
+                        it.playerOn,
+                        it.reason,
+                        it.team,
+                        it.teamId
+                    )
+                },
+                from.liveMatchUpdate?.awayTeam,
+                from.liveMatchUpdate?.homeTeam
             )
         )
 
@@ -164,6 +187,39 @@ class ChatMessageMapper {
                     it.won
                 )
             }
+        ),
+        liveMatchUpdate = LiveMatchUpdate(
+            from.liveMatchUpdateEntity?.bookings?.map {
+                Booking(
+                    it.minute,
+                    it.player,
+                    it.team,
+                    it.teamId,
+                    it.type
+                )
+            },
+            from.liveMatchUpdateEntity?.awayScore,
+            from.liveMatchUpdateEntity?.homeScore,
+            from.liveMatchUpdateEntity?.scorers?.map {
+                Scorer(
+                    it.minute,
+                    it.player,
+                    it.team,
+                    it.teamId
+                )
+            },
+            from.liveMatchUpdateEntity?.substitutions?.map {
+                Substitution(
+                    it.minute,
+                    it.playerOff,
+                    it.playerOn,
+                    it.reason,
+                    it.team,
+                    it.teamId
+                )
+            },
+            from.liveMatchUpdateEntity?.awayTeam,
+            from.liveMatchUpdateEntity?.homeTeam
         )
     )
 
@@ -234,5 +290,42 @@ class ChatMessageMapper {
                 )
             }
         )
+    )
+
+    fun fromLiveMatchUpdate(from: LiveMatchUpdateResponse) = ChatMessage(
+        liveMatchUpdate = LiveMatchUpdate(
+            from.bookings?.map {
+                Booking(
+                    it.minute,
+                    it.player,
+                    it.team,
+                    it.teamId,
+                    it.type
+                )
+            },
+            from.awayScore,
+            from.homeScore,
+            from.scorers?.map {
+                Scorer(
+                    it.minute,
+                    it.player,
+                    it.team,
+                    it.teamId
+                )
+            },
+            from.substitutions?.map {
+                Substitution(
+                    it.minute,
+                    it.playerOff,
+                    it.playerOn,
+                    it.reason,
+                    it.team,
+                    it.teamId
+                )
+            },
+            from.awayTeam,
+            from.homeTeam
+        ),
+        intent = ChatMessageIntent.RECEIVED_LIVE_MATCH_UPDATE
     )
 }
