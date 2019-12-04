@@ -9,6 +9,13 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="@dimen/messageCardElevation">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_player"
+        tools:ignore="ContentDescription" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:padding="10dp"
