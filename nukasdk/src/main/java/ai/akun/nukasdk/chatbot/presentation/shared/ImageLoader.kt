@@ -23,6 +23,12 @@ class ImageLoader {
                 .into(imageView)
         }
 
+        fun load(resourceId: Int, imageView: ImageView) {
+            Glide.with(imageView.context)
+                .load(resourceId)
+                .into(imageView)
+        }
+
     }
 
 }
