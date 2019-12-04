@@ -16,7 +16,7 @@ class LiveMatchUpdateViewHolder(itemView: View) : ChatMessageViewHolder(itemView
                 loadData(
                     booking.team,
                     booking.minute,
-                    R.drawable.ic_shield,
+                    R.drawable.ic_red_card,
                     booking.player,
                     chatMessage.liveMatchUpdate.homeTeam!!,
                     chatMessage.liveMatchUpdate.awayTeam!!
@@ -27,7 +27,7 @@ class LiveMatchUpdateViewHolder(itemView: View) : ChatMessageViewHolder(itemView
                 loadData(
                     scorer.team,
                     scorer.minute,
-                    R.drawable.ic_shield,
+                    R.drawable.ic_ball,
                     scorer.player,
                     chatMessage.liveMatchUpdate.homeTeam!!,
                     chatMessage.liveMatchUpdate.awayTeam!!
@@ -38,7 +38,7 @@ class LiveMatchUpdateViewHolder(itemView: View) : ChatMessageViewHolder(itemView
                 loadData(
                     substitution.team,
                     substitution.minute,
-                    R.drawable.ic_shield,
+                    R.drawable.ic_substitution,
                     itemView.context.getString(R.string.substitution_description, substitution.playerOn, substitution.playerOff),
                     chatMessage.liveMatchUpdate.homeTeam!!,
                     chatMessage.liveMatchUpdate.awayTeam!!
