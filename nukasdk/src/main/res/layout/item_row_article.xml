@@ -9,54 +9,42 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="@dimen/messageCardElevation">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/articleImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/image_placeholder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#80000000"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_gravity="bottom">
 
-        <ImageView
-            android:id="@+id/articleImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/image_placeholder" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/articleTitle"
+            style="@style/ChatMessage.ItemTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#80000000"
-            android:orientation="vertical"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Gol de Diego Valencia a Magallanes" />
 
-            <TextView
-                android:id="@+id/articleTitle"
-                style="@style/ChatMessage.ItemTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="Gol de Diego Valencia a Magallanes" />
+        <TextView
+            android:id="@+id/articleSubtitle"
+            style="@style/ChatMessage.ItemSubtitle"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="El delantero anotó el único tanto del partido" />
 
-            <TextView
-                android:id="@+id/articleSubtitle"
-                style="@style/ChatMessage.ItemSubtitle"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="El delantero anotó el único tanto del partido" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/category"
@@ -66,8 +54,6 @@
         android:layout_gravity="end"
         android:layout_marginTop="15dp"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="News" />
 
     <ImageView
