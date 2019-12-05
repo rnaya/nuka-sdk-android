@@ -16,7 +16,7 @@ class ImageLoader {
             circularProgressDrawable.setColorSchemeColors(R.color.accentBlue)
             circularProgressDrawable.start()
 
-            Glide.with(imageView.context)
+            GlideApp.with(imageView.context)
                 .load(imageUrl)
                 .placeholder(circularProgressDrawable)
                 .error(errorPlaceholder!!)
