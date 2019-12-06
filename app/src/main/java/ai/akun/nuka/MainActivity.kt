@@ -1,4 +1,4 @@
-package ai.akun.akunsports
+package ai.akun.nuka
 
 
 import ai.akun.nukasdk.chatbot.presentation.main.ChatBotActivity

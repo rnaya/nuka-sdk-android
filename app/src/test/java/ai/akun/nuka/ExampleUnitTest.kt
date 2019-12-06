@@ -1,4 +1,4 @@
-package ai.akun.akunsports
+package ai.akun.nuka
 
 import org.junit.Test
 

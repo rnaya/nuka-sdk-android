@@ -1,4 +1,4 @@
-package ai.akun.akunsports
+package ai.akun.nuka
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

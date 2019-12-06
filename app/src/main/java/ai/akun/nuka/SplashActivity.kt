@@ -1,4 +1,4 @@
-package ai.akun.akunsports
+package ai.akun.nuka
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
