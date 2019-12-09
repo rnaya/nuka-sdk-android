@@ -14,7 +14,7 @@ import java.io.InputStream
 class UnsafeGlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        val okHttpClient: OkHttpClient = UnsafeHttpsClient.getUnsafeOkHttpClientBuilder().build()
+        val okHttpClient: OkHttpClient = RetrofitBuilder.getInstance(context).build()
         registry.replace(GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(okHttpClient))
     }
 
