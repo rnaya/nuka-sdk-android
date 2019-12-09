@@ -7,8 +7,10 @@ import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageMapper
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageRepository
 import ai.akun.nukasdk.chatbot.data.chatmessage.ChatMessageService
 import ai.akun.nukasdk.chatbot.data.webhook.WebhookService
-import ai.akun.nukasdk.chatbot.presentation.shared.UnsafeHttpsClient
+import ai.akun.nukasdk.chatbot.presentation.shared.RetrofitBuilder
 import android.content.Context
+import android.util.Base64
+import android.util.Base64.NO_WRAP
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -18,9 +20,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import android.util.Base64.NO_WRAP
-import android.util.Base64
-
 
 @Module
 class DataModule {
@@ -44,29 +43,31 @@ class DataModule {
     }
 
     @Provides
-    fun provideChatMessageService(): ChatMessageService {
+    fun provideChatMessageService(context: Context): ChatMessageService {
         val retrofit = getRetrofitInstance(
             getAuthenticationInterceptor(
                 BuildConfig.CHAT_MESSAGE_API_AUTH_USERNAME,
                 BuildConfig.CHAT_MESSAGE_API_PASSWORD
-            )
+            ),
+            context
         )
         return retrofit.create(ChatMessageService::class.java)
     }
 
     @Provides
-    fun provideWebhookService(): WebhookService {
+    fun provideWebhookService(context: Context): WebhookService {
         val retrofit = getRetrofitInstance(
             getAuthenticationInterceptor(
                 BuildConfig.WEBHOOK_API_AUTH_USERNAME,
                 BuildConfig.WEBHOOK_API_PASSWORD
-            )
+            ),
+            context
         )
         return retrofit.create(WebhookService::class.java)
     }
 
-    private fun getRetrofitInstance(authenticationInterceptor: Interceptor): Retrofit {
-        val okHttpClient = getOkHttpClient(authenticationInterceptor)
+    private fun getRetrofitInstance(authenticationInterceptor: Interceptor, context: Context): Retrofit {
+        val okHttpClient = getOkHttpClient(authenticationInterceptor, context)
         return Retrofit.Builder()
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -75,12 +76,8 @@ class DataModule {
             .build()
     }
 
-    private fun getOkHttpClient(authenticationInterceptor: Interceptor) : OkHttpClient {
-        val okHttpClientBuilder: OkHttpClient.Builder = if (BuildConfig.DEBUG)  {
-            UnsafeHttpsClient.getUnsafeOkHttpClientBuilder()
-        } else {
-            OkHttpClient.Builder()
-        }
+    private fun getOkHttpClient(authenticationInterceptor: Interceptor, context: Context) : OkHttpClient {
+        val okHttpClientBuilder = RetrofitBuilder.getInstance(context)
 
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level =
