@@ -44,6 +44,7 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         const val RECORD_AUDIO_PERMISSION_REQUEST_CODE = 1
     }
 
+    private lateinit var connectivityReceiver: ConnectivityReceiver
     private val noConnectionMessageHandler = Handler()
     private val noConnectionMessageRunnable = Runnable {
         noConnectivityMessage.visibility = View.VISIBLE
@@ -95,7 +96,8 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         if(!ConnectivityVerifier.isConnectedOrConnecting(this)) {
             updateNetworkMessage(false, 1000)
         }
-        registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        connectivityReceiver = ConnectivityReceiver()
+        registerReceiver(connectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         noConnectivityMessage.setOnTouchListener { _, _ -> true } //disable touch
 
     }
@@ -110,6 +112,11 @@ class ChatBotActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRe
         super.onStop()
         noConnectionMessageHandler.removeCallbacks(noConnectionMessageRunnable)
         EventBus.getDefault().unregister(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(connectivityReceiver)
     }
 
     private fun setUpViewModel() {
