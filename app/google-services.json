@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "127827456681",
+    "firebase_url": "https://nuka-96760.firebaseio.com",
+    "project_id": "nuka-96760",
+    "storage_bucket": "nuka-96760.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127827456681:android:db07156dbe32a6d764efb8",
+        "android_client_info": {
+          "package_name": "ai.akun.nuka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127827456681-59952psdj6r0ao7p68lj8a2i967vesrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLLdkTUJCQArbN_MpwLkyPIOdnqkWO0ag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127827456681-59952psdj6r0ao7p68lj8a2i967vesrt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127827456681-eot1ef1q4bgqv6mdagvvvuedl39vplck.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.akun.nuka"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
