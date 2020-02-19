@@ -28,8 +28,8 @@ android {
             buildConfigField "String", "WEBHOOK_API_PASSWORD", '"nukaWebhook2019!"'
         }
         release {
-            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_URL", '"https://nuka.raisting.co/"'
             buildConfigField "String", "CHAT_MESSAGE_API_AUTH_USERNAME", '"nuka_sdk_android"'
             buildConfigField "String", "CHAT_MESSAGE_API_PASSWORD", '"wNj4a%ZNqe:}jd5h"'
