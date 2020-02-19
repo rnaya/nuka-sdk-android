@@ -128,7 +128,8 @@ class ChatBotViewModel @Inject constructor(private val context: Context,
     }
 
     private fun getCurrentLocale(): String {
-        return if (BuildConfig.DEBUG) "es" else ConfigurationCompat.getLocales(context.resources.configuration)[0].language
+        //return if (BuildConfig.DEBUG) "es" else ConfigurationCompat.getLocales(context.resources.configuration)[0].language
+        return "es"
     }
 
     fun sendLiveMatchUpdatesRequest(matchId: String) {
