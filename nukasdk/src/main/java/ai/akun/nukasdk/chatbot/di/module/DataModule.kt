@@ -80,8 +80,8 @@ class DataModule {
         val okHttpClientBuilder = RetrofitBuilder.getInstance(context)
 
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+//            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
         okHttpClientBuilder.addInterceptor(authenticationInterceptor)
 
